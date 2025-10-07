@@ -81,7 +81,7 @@ public class AutonBase extends LinearOpMode {
 //        flipper = new RobotControlFlipperMotor(theHardwareMap, this);
 
 
-      //  imu = theHardwareMap.chImu;
+        imu = theHardwareMap.chImu;
 
         theHardwareMap.backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         theHardwareMap.backRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -408,20 +408,20 @@ public class AutonBase extends LinearOpMode {
     }
 
     private double getRawHeading() {
-    /*    YawPitchRollAngles orientation = imu.getRobotYawPitchRollAngles();
+        YawPitchRollAngles orientation = imu.getRobotYawPitchRollAngles();
         double yaw   = orientation.getYaw(AngleUnit.DEGREES);
         double pitch   = orientation.getPitch(AngleUnit.DEGREES);
         double roll   = orientation.getRoll(AngleUnit.DEGREES);
         Log.println(Log.INFO, "IMU Yaw: ", String.valueOf(yaw));
         Log.println(Log.INFO, "IMU Pitch: ", String.valueOf(pitch));
-        Log.println(Log.INFO, "IMU Roll: ", String.valueOf(roll));*/
-        return 0;//yaw;
+        Log.println(Log.INFO, "IMU Roll: ", String.valueOf(roll));
+        return yaw;
     }
 
     private void resetHeading() {
         // Save a new heading offset equal to the current raw heading.
- //       imu.resetYaw();
- //       headingOffset = getRawHeading();
+        imu.resetYaw();
+        headingOffset = getRawHeading();
         Log.println(Log.INFO, "Heading Offset", String.valueOf(headingOffset));
         robotHeading = 0;
     }

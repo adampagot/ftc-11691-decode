@@ -81,7 +81,7 @@ public class AutonBlueClose extends AutonBase {
             //drive to deliver pixel
             imuDrive(0.25, -5.5, 0);
             encoderStrafe(0.5, -35, 5);
-         //   imuTurn(0.5, 90);
+            imuTurn(0.5, 90);
 /*
             //deliver pixel
             armMotor.moveArmEncoded(ArmPositions.BACK_ARC_MAX);

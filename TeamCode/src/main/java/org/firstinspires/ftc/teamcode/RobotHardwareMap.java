@@ -55,7 +55,7 @@ public class RobotHardwareMap {
     public Servo servoLauncher;
 
 
-   // public IMU chImu;
+    public IMU chImu;
 
     private final int baseResolution_x = 320;
     private final int baseResolution_y = 240;
@@ -97,7 +97,7 @@ public class RobotHardwareMap {
         }
 
         //Initializes the IMU
- //       chImu = baseHMap.get(IMU.class, "chImu");
+        chImu = baseHMap.get(IMU.class, "chImu");
 
         //Bucky Parameters
         /*
@@ -106,14 +106,14 @@ public class RobotHardwareMap {
                                 RevHubOrientationOnRobot.LogoFacingDirection.RIGHT,
                                 RevHubOrientationOnRobot.UsbFacingDirection.UP
                     )
-        );*//*
+        );*/
         IMU.Parameters myIMUParamaters = new IMU.Parameters(
                 new RevHubOrientationOnRobot(
                         RevHubOrientationOnRobot.LogoFacingDirection.BACKWARD,
                         RevHubOrientationOnRobot.UsbFacingDirection.UP
                 )
         );
-        chImu.initialize(myIMUParamaters);*/
+        chImu.initialize(myIMUParamaters);
 
         opMode.telemetry.addData("Status", "done");
         opMode.telemetry.update();
