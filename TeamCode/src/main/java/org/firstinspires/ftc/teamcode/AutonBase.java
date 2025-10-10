@@ -31,7 +31,7 @@ public class AutonBase extends LinearOpMode {
     AprilTagProcessor aprilTagProcessor;
  //   VisionPortal visionPortal;
 
-    private IMU imu         = null;
+     IMU imu         = null;
 
     private double targetHeading = 0;
     private double headingOffset = 0;
@@ -413,8 +413,11 @@ public class AutonBase extends LinearOpMode {
         double pitch   = orientation.getPitch(AngleUnit.DEGREES);
         double roll   = orientation.getRoll(AngleUnit.DEGREES);
         Log.println(Log.INFO, "IMU Yaw: ", String.valueOf(yaw));
+        telemetry.addData("IMU Yaw",String.valueOf(yaw));
         Log.println(Log.INFO, "IMU Pitch: ", String.valueOf(pitch));
+        telemetry.addData("IMU Pitch",String.valueOf(pitch));
         Log.println(Log.INFO, "IMU Roll: ", String.valueOf(roll));
+        telemetry.addData("IMU Roll",String.valueOf(roll));
         return yaw;
     }
 

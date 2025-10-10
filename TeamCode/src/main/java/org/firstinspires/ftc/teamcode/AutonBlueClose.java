@@ -1,7 +1,12 @@
 package org.firstinspires.ftc.teamcode;
 
+import android.util.Log;
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.DcMotor;
+
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 
 /*
 import org.firstinspires.ftc.teamcode.hardware.ArmPositions;
@@ -65,6 +70,17 @@ public class AutonBlueClose extends AutonBase {
 
         //Left
         if(parkingPosition == 1){
+            YawPitchRollAngles orientation = imu.getRobotYawPitchRollAngles();
+            double yaw   = orientation.getYaw(AngleUnit.DEGREES);
+            double pitch   = orientation.getPitch(AngleUnit.DEGREES);
+            double roll   = orientation.getRoll(AngleUnit.DEGREES);
+            Log.println(Log.INFO, "IMU Yaw: ", String.valueOf(yaw));
+            telemetry.addData("IMU Yaw",String.valueOf(yaw));
+            Log.println(Log.INFO, "IMU Pitch: ", String.valueOf(pitch));
+            telemetry.addData("IMU Pitch",String.valueOf(pitch));
+            Log.println(Log.INFO, "IMU Roll: ", String.valueOf(roll));
+            telemetry.addData("IMU Roll",String.valueOf(roll));
+            telemetry.update();
             imuDrive(.4, 5, 0);
             encoderStrafe(0.25,-11.75,5);
             imuDrive(0.25, 25, 0);
