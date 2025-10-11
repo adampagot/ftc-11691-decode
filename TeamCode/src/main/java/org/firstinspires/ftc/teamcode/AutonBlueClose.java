@@ -65,10 +65,17 @@ public class AutonBlueClose extends AutonBase {
 
         //Left
         if(parkingPosition == 1){
-            imuDrive(.4, 5, 0);
+            /* imuDrive(.4, 5, 0);
             encoderStrafe(0.25,-11.75,5);
             imuDrive(0.25, 25, 0);
             imuDrive(.25,-6,0);
+
+             */
+            //theHardwareMap.intakeMotorFront.set
+            while (1 == 1) {
+                theHardwareMap.intakeMotorFront.setPower(1.0);
+            theHardwareMap.intakeMotorFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            }
 /*
             //move arm down to deliver
             armMotor.moveArmEncoded(ArmPositions.FRONT_ARC_MIN);
@@ -76,12 +83,12 @@ public class AutonBlueClose extends AutonBase {
             clawServo2.moveToPosition(GripperPositions.GRIPPER2_OPEN);
             sleep(1000);
             armMotor.moveArmEncoded(ArmPositions.FRONT_ARC_ZERO);*/
-            sleep(1000);
+           // sleep(1000);
 
             //drive to deliver pixel
-            imuDrive(0.25, -5.5, 0);
-            encoderStrafe(0.5, -35, 5);
-            imuTurn(0.5, 90);
+            // imuDrive(0.25, -5.5, 0);
+            //encoderStrafe(0.5, -35, 5);
+            //imuTurn(0.5, 90);
 /*
             //deliver pixel
             armMotor.moveArmEncoded(ArmPositions.BACK_ARC_MAX);
@@ -96,8 +103,8 @@ public class AutonBlueClose extends AutonBase {
             sleep(250);*/
 
             //park
-            encoderStrafe(0.5, 15, 5);
-            sleep(250);
+         //   encoderStrafe(0.5, 15, 5);
+           // sleep(250);
         }
         //Middle
         else if(parkingPosition == 2){

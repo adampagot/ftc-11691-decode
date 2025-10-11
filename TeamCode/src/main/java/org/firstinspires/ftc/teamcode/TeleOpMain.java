@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 //import com.acmerobotics.dashboard.FtcDashboard;
 //import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.Gamepad;
 //import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 //import com.qualcomm.robotcore.hardware.DistanceSensor;
 //import com.qualcomm.robotcore.hardware.Gamepad;
@@ -110,26 +111,26 @@ public class TeleOpMain extends LinearOpMode {
         lights.switchLight(Light.LED1, LightMode.OFF);
 		lights.switchLight(Light.LED2, LightMode.GREEN);
         boolean showTelemetry = false;
-
-        //create some gamepads to look at debouncing
+*/
+       // create some gamepads to look at debouncing
         Gamepad currentGamepad1 = new Gamepad();
         Gamepad currentGamepad2 = new Gamepad();
         Gamepad previousGamepad1 = new Gamepad();
         Gamepad previousGamepad2 = new Gamepad();
 
-      double currentClaw = 0.8;*/
+      //double currentClaw = 0.8;
         //Main Loop
         while (opModeIsActive()) {
 
-  /*        loopTimeStart = System.currentTimeMillis();
+        //  loopTimeStart = System.currentTimeMillis();
 
-            //copy over the previous gamepads so we can compare what changed
+           //copy over the previous gamepads so we can compare what changed
             previousGamepad1.copy(currentGamepad1);
             previousGamepad2.copy(currentGamepad2);
 
             currentGamepad1.copy(gamepad1);
             currentGamepad2.copy(gamepad2);
-*/
+
             //mechanum drive - left stick y is negative because the up is negative
             double drive = -1 * gamepad1.left_stick_y;
             double strafe = -1 * gamepad1.left_trigger + gamepad1.right_trigger;
@@ -158,7 +159,7 @@ public class TeleOpMain extends LinearOpMode {
                 slowMode = false;
                 lights.switchLight(Light.LED2, LightMode.YELLOW);
             }
-/*
+
             //Drone launch
             if (currentGamepad1.x && !previousGamepad1.x)
             {
@@ -167,7 +168,7 @@ public class TeleOpMain extends LinearOpMode {
             } else if (!currentGamepad1.x && previousGamepad1.x) {
                 servoLauncher.moveToPosition(GripperPositions.DRONE_READY);
                 telemetry.addData("Drone Reset",servoLauncher.getCurrentPosition());
-       /*     }
+           }
 
             //Distance Sensor Alignment
             //TODO: Add functionality with April Tags
