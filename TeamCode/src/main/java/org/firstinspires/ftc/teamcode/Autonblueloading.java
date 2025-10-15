@@ -8,6 +8,7 @@ public class Autonblueloading extends AutonBase {
     @Override
     public void runOpMode() {
 
+
         initialize();
         waitForStart();
         //start with only rear right corner touching wall

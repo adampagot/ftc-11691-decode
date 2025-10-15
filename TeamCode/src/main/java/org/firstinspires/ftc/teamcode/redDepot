@@ -1,0 +1,6 @@
+        //Start right against edge of red goal facing straight towards base zones (in square E6 grid) with left robot corner touching the goal corner(robot must be touching launch line).
+        //aim (spin) to red goal
+        //shoot
+        //face intake towards artifacts (A3 NOT grid)
+        //activate intake
+        //go to artifacts A3 from shortest side (intake facing secret tunnel)

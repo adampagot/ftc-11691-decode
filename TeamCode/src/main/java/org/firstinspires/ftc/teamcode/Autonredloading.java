@@ -7,12 +7,14 @@ public class Autonredloading extends AutonBase {
 
     @Override
     public void runOpMode() {
+        
 
         initialize();
         waitForStart();
         //start with only rear right corner touching wall
         //aim at goal from smaller shooting zone
         //activate outake before shooting
+        //aim
         encoderStrafe(.5,5,3);
         imuDrive(.5,-3,0);
         //shoot
