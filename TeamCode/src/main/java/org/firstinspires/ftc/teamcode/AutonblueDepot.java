@@ -8,6 +8,7 @@ public class AutonblueDepot extends AutonBase {
     @Override
     public void runOpMode() {
 
+
         initialize();
         waitForStart();
        //getting ready to shoot
