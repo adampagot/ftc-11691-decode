@@ -37,10 +37,10 @@ public class RobotControlMechanum {
      * Initialization for the mechanum wheels to match up to control
      */
     public void initialize(){
-        robotHardwareMap.backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        robotHardwareMap.backRightMotor.setDirection(DcMotorSimple.Direction.FORWARD); //on bucky this is reverse
-        robotHardwareMap.frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        robotHardwareMap.frontRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        robotHardwareMap.backLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        robotHardwareMap.backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE); //on bucky this is reverse
+        robotHardwareMap.frontLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        robotHardwareMap.frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
     /***
