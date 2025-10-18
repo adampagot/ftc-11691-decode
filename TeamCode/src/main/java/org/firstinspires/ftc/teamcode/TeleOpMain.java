@@ -25,6 +25,7 @@ import org.firstinspires.ftc.teamcode.hardware.RobotControlFlipperMotor;
 import org.firstinspires.ftc.teamcode.hardware.RobotControlGripperServos;
 import org.firstinspires.ftc.teamcode.hardware.RobotControlLifter;
 import org.firstinspires.ftc.teamcode.hardware.RobotControlLights;*/
+import org.firstinspires.ftc.teamcode.hardware.Intake;
 import org.firstinspires.ftc.teamcode.hardware.RobotControlMechanum;/*
 //import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
@@ -50,6 +51,9 @@ public class TeleOpMain extends LinearOpMode {
 */
         RobotControlMechanum robotDrive = new RobotControlMechanum(theHardwareMap, this);
         robotDrive.initialize();
+
+        Intake intake = new Intake (theHardwareMap, this);
+        intake.initialize();
 /*
         RobotControlLights lights = new RobotControlLights(theHardwareMap, this);
         RobotControlLifter liftMotor = new RobotControlLifter(theHardwareMap,this);
@@ -161,16 +165,14 @@ public class TeleOpMain extends LinearOpMode {
             }
 
             //Drone launch
-            if (currentGamepad1.x && !previousGamepad1.x)
+            */ if (currentGamepad1.a && !previousGamepad1.a)
             {
-                servoLauncher.moveToPosition(GripperPositions.DRONE_LAUNCH);
-                telemetry.addData ("Drone Launch",servoLauncher.getCurrentPosition());
-            } else if (!currentGamepad1.x && previousGamepad1.x) {
-                servoLauncher.moveToPosition(GripperPositions.DRONE_READY);
-                telemetry.addData("Drone Reset",servoLauncher.getCurrentPosition());
+
+                intake.Toggle ();
            }
 
-            //Distance Sensor Alignment
+
+            /* //Distance Sensor Alignment
             //TODO: Add functionality with April Tags
             //TODO: Make sure you can run auton functionality in TeleOp
             if (currentGamepad1.a){
