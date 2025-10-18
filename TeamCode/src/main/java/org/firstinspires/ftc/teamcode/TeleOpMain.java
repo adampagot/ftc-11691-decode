@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 //import com.acmerobotics.dashboard.FtcDashboard;
 //import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.Gamepad;
 //import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 //import com.qualcomm.robotcore.hardware.DistanceSensor;
 //import com.qualcomm.robotcore.hardware.Gamepad;
@@ -24,6 +25,7 @@ import org.firstinspires.ftc.teamcode.hardware.RobotControlFlipperMotor;
 import org.firstinspires.ftc.teamcode.hardware.RobotControlGripperServos;
 import org.firstinspires.ftc.teamcode.hardware.RobotControlLifter;
 import org.firstinspires.ftc.teamcode.hardware.RobotControlLights;*/
+import org.firstinspires.ftc.teamcode.hardware.Intake;
 import org.firstinspires.ftc.teamcode.hardware.RobotControlMechanum;/*
 //import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
@@ -49,6 +51,9 @@ public class TeleOpMain extends LinearOpMode {
 */
         RobotControlMechanum robotDrive = new RobotControlMechanum(theHardwareMap, this);
         robotDrive.initialize();
+
+        Intake intake = new Intake (theHardwareMap, this);
+        intake.initialize();
 /*
         RobotControlLights lights = new RobotControlLights(theHardwareMap, this);
         RobotControlLifter liftMotor = new RobotControlLifter(theHardwareMap,this);
@@ -110,26 +115,26 @@ public class TeleOpMain extends LinearOpMode {
         lights.switchLight(Light.LED1, LightMode.OFF);
 		lights.switchLight(Light.LED2, LightMode.GREEN);
         boolean showTelemetry = false;
-
-        //create some gamepads to look at debouncing
+*/
+       // create some gamepads to look at debouncing
         Gamepad currentGamepad1 = new Gamepad();
         Gamepad currentGamepad2 = new Gamepad();
         Gamepad previousGamepad1 = new Gamepad();
         Gamepad previousGamepad2 = new Gamepad();
 
-      double currentClaw = 0.8;*/
+      //double currentClaw = 0.8;
         //Main Loop
         while (opModeIsActive()) {
 
-  /*        loopTimeStart = System.currentTimeMillis();
+        //  loopTimeStart = System.currentTimeMillis();
 
-            //copy over the previous gamepads so we can compare what changed
+           //copy over the previous gamepads so we can compare what changed
             previousGamepad1.copy(currentGamepad1);
             previousGamepad2.copy(currentGamepad2);
 
             currentGamepad1.copy(gamepad1);
             currentGamepad2.copy(gamepad2);
-*/
+
             //mechanum drive - left stick y is negative because the up is negative
             double drive = -1 * gamepad1.left_stick_y;
             double strafe = -1 * gamepad1.left_trigger + gamepad1.right_trigger;
@@ -158,18 +163,16 @@ public class TeleOpMain extends LinearOpMode {
                 slowMode = false;
                 lights.switchLight(Light.LED2, LightMode.YELLOW);
             }
-/*
-            //Drone launch
-            if (currentGamepad1.x && !previousGamepad1.x)
-            {
-                servoLauncher.moveToPosition(GripperPositions.DRONE_LAUNCH);
-                telemetry.addData ("Drone Launch",servoLauncher.getCurrentPosition());
-            } else if (!currentGamepad1.x && previousGamepad1.x) {
-                servoLauncher.moveToPosition(GripperPositions.DRONE_READY);
-                telemetry.addData("Drone Reset",servoLauncher.getCurrentPosition());
-       /*     }
 
-            //Distance Sensor Alignment
+            //Drone launch
+            */ if (currentGamepad1.a && !previousGamepad1.a)
+            {
+
+                intake.Toggle ();
+           }
+
+
+            /* //Distance Sensor Alignment
             //TODO: Add functionality with April Tags
             //TODO: Make sure you can run auton functionality in TeleOp
             if (currentGamepad1.a){
