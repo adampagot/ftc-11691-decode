@@ -26,6 +26,7 @@ import org.firstinspires.ftc.teamcode.hardware.RobotControlGripperServos;
 import org.firstinspires.ftc.teamcode.hardware.RobotControlLifter;
 import org.firstinspires.ftc.teamcode.hardware.RobotControlLights;*/
 import org.firstinspires.ftc.teamcode.hardware.Intake;
+import org.firstinspires.ftc.teamcode.hardware.Outtake;
 import org.firstinspires.ftc.teamcode.hardware.RobotControlMechanum;/*
 //import org.firstinspires.ftc.vision.VisionPortal;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
@@ -54,6 +55,10 @@ public class TeleOpMain extends LinearOpMode {
 
         Intake intake = new Intake (theHardwareMap, this);
         intake.initialize();
+
+        Outtake outtake = new Outtake (theHardwareMap, this);
+        outtake.initialize();
+/*
 /*
         RobotControlLights lights = new RobotControlLights(theHardwareMap, this);
         RobotControlLifter liftMotor = new RobotControlLifter(theHardwareMap,this);
@@ -169,7 +174,14 @@ public class TeleOpMain extends LinearOpMode {
             {
 
                 intake.Toggle ();
-           }
+
+            }
+
+            if (currentGamepad1.x && !previousGamepad1.x)
+            {
+
+                outtake.Toggle ();
+            }
 
 
             /* //Distance Sensor Alignment

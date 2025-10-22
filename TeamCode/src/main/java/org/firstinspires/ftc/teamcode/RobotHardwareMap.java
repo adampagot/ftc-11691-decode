@@ -43,6 +43,8 @@ public class RobotHardwareMap {
     public DcMotorEx frontLeftMotor;
     public DcMotorEx frontRightMotor;
     public DcMotorEx intakeMotorFront;
+    public DcMotorEx outtakeMotorBack1;
+    public DcMotorEx outtakeMotorBack2;
     public DcMotorEx clawRotator;
     public DcMotorEx armMotor;
  //   public DcMotorEx lifterMotor;
@@ -87,6 +89,8 @@ public class RobotHardwareMap {
         frontLeftMotor = baseHMap.get(DcMotorEx.class, "FL");
         frontRightMotor = baseHMap.get(DcMotorEx.class, "FR");
         intakeMotorFront = baseHMap.get(DcMotorEx.class,"IF");
+        outtakeMotorBack1 = baseHMap.get(DcMotorEx.class,"BRO");
+        outtakeMotorBack2 = baseHMap.get(DcMotorEx.class,"BLO");
 //        lifterMotor = baseHMap.get(DcMotorEx.class, "Lifter");
 
         //Camera
