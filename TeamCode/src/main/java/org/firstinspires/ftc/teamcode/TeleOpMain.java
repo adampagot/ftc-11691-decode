@@ -187,6 +187,11 @@ public class TeleOpMain extends LinearOpMode {
             {
 
                 outtake.RunTransferServo ();
+
+            }
+
+            else {
+                outtake.StopTransferServo();
             }
 
             /* //Distance Sensor Alignment

@@ -58,6 +58,11 @@ public void ToggleOuttakeMotor () {
 
         }
 
+        public void StopTransferServo () {
+        robotHardwareMap.LeftTransferServo.setPower(0);
+            robotHardwareMap.RightTransferServo.setPower(0);
+        }
+
 }
 
 
