@@ -4,6 +4,7 @@ import com.qualcomm.hardware.lynx.LynxModule;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.AnalogInput;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
@@ -53,9 +54,9 @@ public class RobotHardwareMap {
     public DigitalChannel LED2Green;
     public DigitalChannel LED2Red;
 
-    public Servo servoClaw1;
-    public Servo servoClaw2;
-    public Servo servoLauncher;
+    public CRServo LeftTransferServo;
+    public CRServo RightTransferServo;
+
 
 
     public IMU chImu;
@@ -92,6 +93,8 @@ public class RobotHardwareMap {
         outtakeMotorBack1 = baseHMap.get(DcMotorEx.class,"BRO");
         outtakeMotorBack2 = baseHMap.get(DcMotorEx.class,"BLO");
 //        lifterMotor = baseHMap.get(DcMotorEx.class, "Lifter");
+        LeftTransferServo = baseHMap.get(CRServo.class,"LTS");
+        RightTransferServo = baseHMap.get(CRServo.class,"RTS");
 
         //Camera
         try {
@@ -100,6 +103,7 @@ public class RobotHardwareMap {
             opMode.telemetry.addData("cameras", "success ");
         } catch (IllegalArgumentException iae){
             opMode.telemetry.addData("cameras", iae.getMessage());
+
         }
 
         //Initializes the IMU

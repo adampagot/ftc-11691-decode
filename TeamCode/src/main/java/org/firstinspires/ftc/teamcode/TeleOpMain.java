@@ -169,7 +169,7 @@ public class TeleOpMain extends LinearOpMode {
                 lights.switchLight(Light.LED2, LightMode.YELLOW);
             }
 
-            //Drone launch
+            //Intake
             */ if (currentGamepad1.a && !previousGamepad1.a)
             {
 
@@ -180,9 +180,14 @@ public class TeleOpMain extends LinearOpMode {
             if (currentGamepad1.x && !previousGamepad1.x)
             {
 
-                outtake.Toggle ();
+                outtake.ToggleOuttakeMotor ();
             }
 
+            if (currentGamepad1.y)
+            {
+
+                outtake.RunTransferServo ();
+            }
 
             /* //Distance Sensor Alignment
             //TODO: Add functionality with April Tags
