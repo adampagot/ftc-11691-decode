@@ -83,10 +83,10 @@ public class AutonBase extends LinearOpMode {
 
         imu = theHardwareMap.chImu;
 
-        theHardwareMap.backLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-        theHardwareMap.backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
-        theHardwareMap.frontLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
-        theHardwareMap.frontRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        theHardwareMap.backLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        theHardwareMap.backRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        theHardwareMap.frontLeftMotor.setDirection(DcMotorSimple.Direction.REVERSE);
+        theHardwareMap.frontRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
         theHardwareMap.frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         theHardwareMap.frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
