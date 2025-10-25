@@ -4,6 +4,7 @@ package org.firstinspires.ftc.teamcode;
 //import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+
 //import android.util.Log;
 //import android.util.Size;
 
@@ -81,34 +82,13 @@ public class TeleOpMain extends LinearOpMode {
         /*FtcDashboard dashboard = FtcDashboard.getInstance();
         telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());*/
 
+        theHardwareMap.initAprilTag();
+
         telemetry.addData("Robot", "Initialized successfully");
         telemetry.update();
 
         waitForStart();
-        /*AprilTagProcessor aprilTagProcessor = new AprilTagProcessor.Builder()
-                .setDrawAxes(true)
-                .setDrawTagID(true)
-                .setDrawCubeProjection(true)
-                .setDrawTagOutline(true)
-                .build();
-        VisionPortal visionPortal = new VisionPortal.Builder()
-                .addProcessor(aprilTagProcessor)
-                .setCamera(theHardwareMap.frontCamera)
-                .setCameraResolution(new Size(640, 480))
-                .setStreamFormat(VisionPortal.StreamFormat.YUY2)
-                .enableLiveView(true)
-                .setAutoStopLiveView(true)
-                .build();
-
-
-        // do something in init mode?
-        while (opModeInInit()) {
-            //telemetry.addData("Robot", "Initialized successfully. Ready to run?");
-            //telemetry.update();
-
-
-        }*/
-
+      //  theHardwareMap.telemetryAprilTag();
         telemetry.addData("Robot", "running teleop.. press (Y) For telemetry");
         telemetry.update();
 /*
