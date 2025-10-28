@@ -88,19 +88,9 @@ public class TeleOpMain extends LinearOpMode {
         telemetry.update();
 
         waitForStart();
-      //  theHardwareMap.telemetryAprilTag();
         telemetry.addData("Robot", "running teleop.. press (Y) For telemetry");
         telemetry.update();
-/*
-        lights.switchLight(Light.ALL, LightMode.OFF);
 
-        //Initialize remaining variables
-        double loopTimeStart = 0;
-        boolean slowMode = true;
-        lights.switchLight(Light.LED1, LightMode.OFF);
-		lights.switchLight(Light.LED2, LightMode.GREEN);
-        boolean showTelemetry = false;
-*/
        // create some gamepads to look at debouncing
         Gamepad currentGamepad1 = new Gamepad();
         Gamepad currentGamepad2 = new Gamepad();
@@ -110,7 +100,7 @@ public class TeleOpMain extends LinearOpMode {
       //double currentClaw = 0.8;
         //Main Loop
         while (opModeIsActive()) {
-
+            theHardwareMap.telemetryAprilTag();
         //  loopTimeStart = System.currentTimeMillis();
 
            //copy over the previous gamepads so we can compare what changed
@@ -139,38 +129,23 @@ public class TeleOpMain extends LinearOpMode {
             }*/
 
             robotDrive.teleOpMechanum(drive, strafe, twist);
-/*
-            //slow mode
-            if (currentGamepad1.left_bumper && !previousGamepad1.left_bumper) {
-                slowMode = true;
-                lights.switchLight(Light.LED2, LightMode.GREEN);
-            } else if (currentGamepad1.right_bumper && !previousGamepad1.right_bumper) {
-                slowMode = false;
-                lights.switchLight(Light.LED2, LightMode.YELLOW);
-            }
 
-            //Intake
-            */ if (currentGamepad1.a && !previousGamepad1.a)
-            {
+            if (currentGamepad1.a && !previousGamepad1.a) {
 
-                intake.Toggle ();
+                intake.Toggle();
 
             }
 
-            if (currentGamepad1.x && !previousGamepad1.x)
-            {
+            if (currentGamepad1.x && !previousGamepad1.x) {
 
-                outtake.ToggleOuttakeMotor ();
+                outtake.ToggleOuttakeMotor();
             }
 
-            if (currentGamepad1.y)
-            {
+            if (currentGamepad1.y) {
 
-                outtake.RunTransferServo ();
+                outtake.RunTransferServo();
 
-            }
-
-            else {
+            } else {
                 outtake.StopTransferServo();
             }
 
@@ -249,49 +224,7 @@ public class TeleOpMain extends LinearOpMode {
 
             //Arm Up/Down
             /*if (currentGamepad2.left_stick_y != 0)
-            {
-                armMotor.moveArmPower(-currentGamepad2.left_stick_y);
-            } else {
-                armMotor.stopArmWithHold();
-            }
 
-
-            if (currentGamepad2.dpad_up && !previousGamepad2.dpad_up){
-                armMotor.moveArmEncoded(ArmPositions.FRONT_ARC_ZERO);
-
-            } else if (currentGamepad2.dpad_down && !previousGamepad2.dpad_down){
-                armMotor.moveArmEncoded(ArmPositions.FRONT_ARC_MIN);
-
-            }
-
-            //Flipper
-            if (currentGamepad2.right_stick_y !=0)
-            {
-                flipperMotor.moveFlipperPower(-currentGamepad2.right_stick_y);
-            } else {
-                flipperMotor.stopFlipper();
-            }
-
-            //Move the flipper down to pick up 2
-            if (currentGamepad2.b && !previousGamepad2.b && (Math.abs((robotControlFlipperPotentiometer.getCurrentPotPosition() - FlipperPotentiometerPositions.CLAW2_DOWN.getVoltagePos())) > 0.1))
-            {
-//                flipperMotor.moveFlipperEncoded(FlipperMotorPositions.CLAW2_DOWN);
-                robotControlFlipperPotentiometer.moveToPosition(FlipperPotentiometerPositions.CLAW2_DOWN, flipperMotor, 0.5);
-            }
-            if (currentGamepad2.x && !previousGamepad2.x){
-//                flipperMotor.moveFlipperEncoded(FlipperMotorPositions.CLAW2_UP);
-                robotControlFlipperPotentiometer.moveToPosition(FlipperPotentiometerPositions.CLAW2_PLACE, flipperMotor, 0.5);
-            }
-            //Move the flipper down to pick up 1
-            if (currentGamepad2.a && !previousGamepad2.a  && (Math.abs((robotControlFlipperPotentiometer.getCurrentPotPosition() - FlipperPotentiometerPositions.CLAW1_DOWN.getVoltagePos())) > 0.1))
-            {
-//                flipperMotor.moveFlipperEncoded(FlipperMotorPositions.CLAW1_DOWN);
-                robotControlFlipperPotentiometer.moveToPosition(FlipperPotentiometerPositions.CLAW1_DOWN, flipperMotor, 0.5);
-            }
-            if (currentGamepad2.y && !previousGamepad2.y){
-//                flipperMotor.moveFlipperEncoded(FlipperMotorPositions.CLAW1_UP);
-                robotControlFlipperPotentiometer.moveToPosition(FlipperPotentiometerPositions.CLAW1_PLACE, flipperMotor, 0.5);
-            }
 
             double currentArmPosition = armMotor.getArmEncodedPosition();
 
