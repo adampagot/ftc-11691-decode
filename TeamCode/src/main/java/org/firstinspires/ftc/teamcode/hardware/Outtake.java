@@ -58,6 +58,9 @@ public void ToggleOuttakeMotor () {
         }
 
         }
+        public void increasemotorspeed () {
+        speed = speed + 0.05;
+}
         public void RunTransferServo () {
         robotHardwareMap.LeftTransferServo.setDirection(CRServo.Direction.FORWARD);
             robotHardwareMap.RightTransferServo.setDirection(CRServo.Direction.REVERSE);

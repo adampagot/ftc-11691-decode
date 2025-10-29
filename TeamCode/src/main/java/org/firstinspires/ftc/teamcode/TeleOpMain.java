@@ -92,25 +92,6 @@ public class TeleOpMain extends LinearOpMode {
 
             robotDrive.teleOpMechanum(drive, strafe, twist);
 
-            if (currentGamepad1.a && !previousGamepad1.a) {
-
-                intake.Toggle();
-
-            }
-
-            if (currentGamepad1.x && !previousGamepad1.x) {
-
-                outtake.ToggleOuttakeMotor();
-            }
-
-            if (currentGamepad1.y) {
-
-                outtake.RunTransferServo();
-
-            } else {
-                outtake.StopTransferServo();
-            }
-
             /* //Distance Sensor Alignment
             //TODO: Add functionality with April Tags
             //TODO: Make sure you can run auton functionality in TeleOp
@@ -134,6 +115,25 @@ public class TeleOpMain extends LinearOpMode {
             /***************
              * Gamepad 2
              */
+            if (currentGamepad2.a && !previousGamepad2.a) {
+
+                intake.Toggle();
+
+            }
+
+            if (currentGamepad2.x && !previousGamepad2.x) {
+
+                outtake.ToggleOuttakeMotor();
+            }
+
+            if (currentGamepad2.y) {
+
+                outtake.RunTransferServo();
+
+            } else {
+                outtake.StopTransferServo();
+            }
+
 
             //Open/close claw1
             /*if (currentGamepad2.left_bumper)
