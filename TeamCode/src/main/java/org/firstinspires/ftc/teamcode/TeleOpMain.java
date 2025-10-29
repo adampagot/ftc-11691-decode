@@ -1,41 +1,12 @@
 package org.firstinspires.ftc.teamcode;
 
-
-//import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-
-//import android.util.Log;
-//import android.util.Size;
-
-//import com.acmerobotics.dashboard.FtcDashboard;
-//import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.Gamepad;
-//import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-//import com.qualcomm.robotcore.hardware.DistanceSensor;
-//import com.qualcomm.robotcore.hardware.Gamepad;
-/*
-import org.checkerframework.checker.units.qual.A;
-import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
-//import org.firstinspires.ftc.teamcode.hardware.ArmPositions;
-import org.firstinspires.ftc.teamcode.hardware.RobotControlFlipperPotentiometer;
-//import org.firstinspires.ftc.teamcode.hardware.FlipperPotentiometerPositions; // org.firstinspires.ftc.teamcode.hardware.GripperPositions;
-import org.firstinspires.ftc.teamcode.hardware.RobotControlArm;
-import org.firstinspires.ftc.teamcode.hardware.RobotControlFlipperMotor;
-import org.firstinspires.ftc.teamcode.hardware.RobotControlGripperServos;
-import org.firstinspires.ftc.teamcode.hardware.RobotControlLifter;
-import org.firstinspires.ftc.teamcode.hardware.RobotControlLights;*/
 import org.firstinspires.ftc.teamcode.hardware.Intake;
 import org.firstinspires.ftc.teamcode.hardware.Outtake;
-import org.firstinspires.ftc.teamcode.hardware.RobotControlMechanum;/*
-//import org.firstinspires.ftc.vision.VisionPortal;
-import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
-//import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
-//import org.firstinspires.ftc.teamcode.hardware.Light;
-//import org.firstinspires.ftc.teamcode.hardware.LightMode;
-*/
-//import java.util.List;
+import org.firstinspires.ftc.teamcode.hardware.RobotControlMechanum;
 
 @TeleOp
 public class TeleOpMain extends LinearOpMode {
@@ -60,7 +31,6 @@ public class TeleOpMain extends LinearOpMode {
         Outtake outtake = new Outtake (theHardwareMap, this);
         outtake.initialize();
 /*
-/*
         RobotControlLights lights = new RobotControlLights(theHardwareMap, this);
         RobotControlLifter liftMotor = new RobotControlLifter(theHardwareMap,this);
         RobotControlArm armMotor = new RobotControlArm(theHardwareMap,this);
@@ -70,14 +40,6 @@ public class TeleOpMain extends LinearOpMode {
         RobotControlGripperServos servoLauncher = new RobotControlGripperServos(theHardwareMap,this,"ServoLauncher");
         RobotControlFlipperPotentiometer robotControlFlipperPotentiometer = new RobotControlFlipperPotentiometer(theHardwareMap, this, "potentiometer");
         AutonBase autonBase = new AutonBase();
-
-        DistanceSensor distanceSensor = theHardwareMap.baseHMap.get(DistanceSensor.class, "distance");
-        final int DISTANCE_FROM_BACKBOARD = 7;
-
-        //Set the initial value for the Drone Launcher servo
-        servoLauncher.moveToPosition(GripperPositions.DRONE_READY);
-
-        lights.switchLight(Light.ALL, LightMode.GREEN);
 
         /*FtcDashboard dashboard = FtcDashboard.getInstance();
         telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());*/
@@ -165,26 +127,9 @@ public class TeleOpMain extends LinearOpMode {
                 }
             }
 /*
-            //Lifter motor
-            if (currentGamepad1.y)
-            {
-                liftMotor.moveLifterPower(1.0);
-            }
-            if (currentGamepad1.b)
-            {
-                liftMotor.moveLifterPower(-1.0);
-            }
-            if ((!currentGamepad1.y && previousGamepad1.y)
-                || (!currentGamepad1.b && previousGamepad1.b))
-            {
-                liftMotor.stopLifterWithHold();
-            }
 
-            //parking brake
-            if (currentGamepad1.a && !previousGamepad1.a)
-            {
-                liftMotor.moveLifterPower(-0.4);
-            }
+
+
 
             /***************
              * Gamepad 2
@@ -222,82 +167,7 @@ public class TeleOpMain extends LinearOpMode {
                 theHardwareMap.servoClaw2.setPosition(currentClaw);
             }*/
 
-            //Arm Up/Down
-            /*if (currentGamepad2.left_stick_y != 0)
-
-
-            double currentArmPosition = armMotor.getArmEncodedPosition();
-
-            if (currentArmPosition <= ArmPositions.FRONT_ARC_TOP.getEncodedPos()){
-
-                if (currentGamepad2.b){
-//                flipperMotor.moveFlipperEncoded(FlipperMotorPositions.CLAW2_DOWN);
-                    robotControlFlipperPotentiometer.moveToPosition(FlipperPotentiometerPositions.CLAW2_DOWN, flipperMotor, 1);
-                }
-                else if (currentGamepad2.a){
-//                flipperMotor.moveFlipperEncoded(FlipperMotorPositions.CLAW1_DOWN);
-                    robotControlFlipperPotentiometer.moveToPosition(FlipperPotentiometerPositions.CLAW1_DOWN, flipperMotor, 1);
-                }
-            }
-            else {
-                if (currentGamepad2.b){
-//                flipperMotor.moveFlipperEncoded(FlipperMotorPositions.CLAW2_UP);
-                    robotControlFlipperPotentiometer.moveToPosition(FlipperPotentiometerPositions.CLAW2_PLACE, flipperMotor, 1);
-                }
-                else if (currentGamepad2.a){
-//                flipperMotor.moveFlipperEncoded(FlipperMotorPositions.CLAW1_UP);
-                    robotControlFlipperPotentiometer.moveToPosition(FlipperPotentiometerPositions.CLAW1_PLACE, flipperMotor, 1);
-                }
-
-            }
-
-/*
-            //Check for detections
-            lights.switchLight(Light.LED1, LightMode.OFF);
-            //telemetry.clear();
-
-            if (1 == 0) {
-
-                List<AprilTagDetection> currentDetections = aprilTagProcessor.getDetections();
-
-                //loop through the AprilTag detections to see what we found
-                for (AprilTagDetection detection : currentDetections) {
-                    //update the lights that we found one
-                    lights.switchLight(Light.LED1, LightMode.GREEN);
-
-                    //If we found something, display the data for it
-                    if (detection.ftcPose != null) {
-                        telemetry.addData("Tag Bearing", detection.ftcPose.bearing);
-                        telemetry.addData("Tag Range", detection.ftcPose.range);
-                        telemetry.addData("Tag Yaw", detection.ftcPose.yaw);
-                        telemetry.addData("ID", detection.id);
-
-                    }
-                    //If we detect a specific apriltag and they are pressing X, then we are twisting to that angle
-                    if (detection.id == 5) {
-                        telemetry.addData("Driveauto", detection.id);
-                        double twistAmount = 0.25;
-                        //adjust the twist based on the amount of yaw
-                        //tweak the color for 5 and or 2
-                        //add support for finding 2
-                        //test other buttons for ease of use
-
-                        if (detection.ftcPose.yaw >= 0) {
-                            twistAmount = twistAmount * -1;
-                        }
-                        robotDrive.teleOpMechanum(0, 0, twistAmount);
-                    }
-                }
-            }
-*/
-
-            //    armMotor.addArmTelemetry();
-            //  flipperMotor.addFlipperTelemetry();
-            ///    telemetry.addData("Pot Position", robotControlFlipperPotentiometer.getCurrentPotPosition());
-            //   telemetry.addData("looptime", System.currentTimeMillis() - loopTimeStart);
-            //   telemetry.addData("Servo 1: ", clawServo1.getCurrentPosition().getServoPos());
-            //   telemetry.addData("Servo 2: ", clawServo2.getCurrentPosition().getServoPos());
-            //  telemetry.addData("Drone Launcher: ", servoLauncher.getCurrentPosition().getServoPos());
+            outtake.ControlMotorSpeed();
 
             telemetry.update();
         }
