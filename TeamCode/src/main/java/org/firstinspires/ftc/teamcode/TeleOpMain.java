@@ -134,7 +134,14 @@ public class TeleOpMain extends LinearOpMode {
                 outtake.StopTransferServo();
             }
 
+            if (currentGamepad2.dpad_up && !previousGamepad2.dpad_up) {
 
+                outtake.increasemotorspeed();
+            }
+            if (currentGamepad2.dpad_down && !previousGamepad2.dpad_down) {
+
+                outtake.decreasemotorspeed();
+            }
             //Open/close claw1
             /*if (currentGamepad2.left_bumper)
             {
