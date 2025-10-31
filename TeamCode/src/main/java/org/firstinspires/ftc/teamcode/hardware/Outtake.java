@@ -74,7 +74,7 @@ if (speed>=1)
     }
         public void RunTransferServo () {
         robotHardwareMap.LeftTransferServo.setDirection(CRServo.Direction.FORWARD);
-            robotHardwareMap.RightTransferServo.setDirection(CRServo.Direction.REVERSE);
+            robotHardwareMap.RightTransferServo.setDirection(CRServo.Direction.FORWARD);
             robotHardwareMap.LeftTransferServo.setPower(-1);
             robotHardwareMap.RightTransferServo.setPower(1);
 
