@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.Gamepad;
 import org.firstinspires.ftc.teamcode.hardware.Intake;
 import org.firstinspires.ftc.teamcode.hardware.Outtake;
 import org.firstinspires.ftc.teamcode.hardware.RobotControlMechanum;
+import org.firstinspires.ftc.teamcode.hardware.camera;
 
 @TeleOp
 public class TeleOpMain extends LinearOpMode {
@@ -30,7 +31,10 @@ public class TeleOpMain extends LinearOpMode {
 
         Outtake outtake = new Outtake (theHardwareMap, this);
         outtake.initialize();
-/*
+
+        camera Camera= new camera (theHardwareMap, this );
+
+        /*
         RobotControlLights lights = new RobotControlLights(theHardwareMap, this);
         RobotControlLifter liftMotor = new RobotControlLifter(theHardwareMap,this);
         RobotControlArm armMotor = new RobotControlArm(theHardwareMap,this);
@@ -77,6 +81,11 @@ public class TeleOpMain extends LinearOpMode {
             double strafe = -1 * gamepad1.left_trigger + gamepad1.right_trigger;
             //double strafe = gamepad1.left_stick_x;
             double twist = gamepad1.right_stick_x;
+
+
+            if (currentGamepad1.b) {
+                twist = Camera.Robotallignwithgoal(twist);
+            }
 
             //Speed values for slow mode
           /*  if (slowMode) {

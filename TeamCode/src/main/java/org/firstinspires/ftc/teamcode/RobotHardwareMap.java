@@ -71,7 +71,7 @@ public class RobotHardwareMap {
 
     private final int baseResolution_x = 320;
     private final int baseResolution_y = 240;
-    private AprilTagProcessor aprilTag;
+    public AprilTagProcessor aprilTag;
 
     /**
      * The variable to store our instance of the vision portal.
