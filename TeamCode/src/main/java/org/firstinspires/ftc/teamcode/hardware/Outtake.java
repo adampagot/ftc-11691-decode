@@ -35,6 +35,11 @@ public class Outtake {
 
     public void setSpeed(double speed_in) {
         speed = speed_in;
+        if (speed >= 1) {
+            speed = 1;}
+        else if (speed <= .01) {
+            speed = .01;
+        }
     }
 
     public void ToggleOuttakeMotor() {
