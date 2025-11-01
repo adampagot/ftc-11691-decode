@@ -11,10 +11,11 @@ public class AutonRedDepot extends AutonBase {
         initialize();
 
         waitForStart();
-
-        imuDrive(0.5,56,0);
-//score preloaded artifacts
+        imuTurn(0.6, 15);
+        //score preloaded artifacts
         sleep(3000);
+        imuTurn(.6,30);
+        imuDrive(0.5,56,0);
         imuTurn(0.5, -135);
         imuDrive(0.5,37,0);
 // Turn on intake
