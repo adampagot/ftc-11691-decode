@@ -45,6 +45,12 @@ public class Outtake {
         }
 
     }
+    public void outtakeon() {
+            outtakerunning = true;
+    }
+    public void outtakeoff() {
+        outtakerunning = false;
+    }
 
     public void ControlMotorSpeed() {
         opMode.telemetry.addLine(String.format("outtakespeed %6.3f", speed));
