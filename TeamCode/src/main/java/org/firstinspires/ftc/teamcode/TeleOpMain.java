@@ -83,7 +83,7 @@ public class TeleOpMain extends LinearOpMode {
             double twist = gamepad1.right_stick_x;
 
 
-            if (currentGamepad2.b) {
+            if (currentGamepad1.b) {
                 twist = Camera.Robotallignwithgoal(twist);
             }
 

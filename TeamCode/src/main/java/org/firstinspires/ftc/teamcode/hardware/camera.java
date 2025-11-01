@@ -22,12 +22,18 @@ public class camera {
 
     public double Robotallignwithgoal(double twistin) {
         double twistout = twistin;
+        double powerFactor = 180; // long range value by default
         List<AprilTagDetection> currentDetections = robotHardwareMap.aprilTag.getDetections();
+
         for (AprilTagDetection detection : currentDetections) {
             if (detection.metadata != null) {
                 if ((detection.id == 20) || (detection.id == 24)) {
-                    twistout = twistin + (detection.ftcPose.x / 18);
-                    //value of 18 is rough estimate on the width of the camera at max distance it can pick up april tag
+                    if ((detection.ftcPose.x <= 10) && (detection.ftcPose.x >= -10)) {
+                        powerFactor = 90;
+                    }
+                    twistout= (detection.ftcPose.x / powerFactor) ;
+                    //         = twistin;  if you want to conser input from the stick add twist in here
+                    // value of 180 is rough estimate on the width of the camera at max distance it can pick up april tag(inches)
                 }
             }
 
