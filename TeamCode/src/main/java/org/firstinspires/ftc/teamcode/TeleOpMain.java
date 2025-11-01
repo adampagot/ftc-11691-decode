@@ -135,6 +135,10 @@ public class TeleOpMain extends LinearOpMode {
                 outtake.ToggleOuttakeMotor();
             }
 
+            if (currentGamepad2.b) {
+
+                Camera.outtakespeedfordistance(.25);
+
             if (currentGamepad2.y) {
 
                 outtake.RunTransferServo();
