@@ -34,12 +34,25 @@ public void Toggle () {
     if (speed > 0) {
         speed = 0;
     } else {
-        speed = 0.3;
+        speed = 0.7;
     }
 
     robotHardwareMap.intakeMotorFront.setPower(speed);
     robotHardwareMap.intakeMotorFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 }
+public void on () {
+        speed = 0.3;
+
+        robotHardwareMap.intakeMotorFront.setPower(speed);
+        robotHardwareMap.intakeMotorFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+    }
+    public void off () {
+       speed = 0;
+
+        robotHardwareMap.intakeMotorFront.setPower(speed);
+        robotHardwareMap.intakeMotorFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    }
 }
 
 
