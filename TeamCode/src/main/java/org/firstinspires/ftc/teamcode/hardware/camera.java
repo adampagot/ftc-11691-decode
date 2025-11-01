@@ -31,13 +31,35 @@ public class camera {
                     if ((detection.ftcPose.x <= 10) && (detection.ftcPose.x >= -10)) {
                         powerFactor = 90;
                     }
-                    twistout= (detection.ftcPose.x / powerFactor) ;
+                    twistout = (detection.ftcPose.x / powerFactor);
                     //         = twistin;  if you want to conser input from the stick add twist in here
                     // value of 180 is rough estimate on the width of the camera at max distance it can pick up april tag(inches)
                 }
             }
 
         }
-   return twistout; }
+        return twistout;
+    }
 
+    public double outtakespeedfordistance(double powerin) {
+        List<AprilTagDetection> currentDetections = robotHardwareMap.aprilTag.getDetections();
+        double power = powerin;
+        double y2 = 124;
+        double y1 = 50;
+        double p2 = 0.45;
+        double p1 = 0.10;
+        double m = (p2 - p1) / (y2 - y1);
+        double b = (p2 - (m * y2));
+        for (AprilTagDetection detection : currentDetections) {
+            if (detection.metadata != null) {
+                if ((detection.id == 20) || (detection.id == 24)) {
+                    power= (m*detection.ftcPose.y) + b;
+
+                }
+            }
+
+        }
+        return power;
+    }
 }
+
