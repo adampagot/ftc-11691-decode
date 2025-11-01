@@ -27,7 +27,7 @@ public class Outtake {
         robotHardwareMap.outtakeMotorBack1.setDirection(DcMotorSimple.Direction.FORWARD);
         robotHardwareMap.outtakeMotorBack2.setDirection(DcMotorSimple.Direction.REVERSE);
         outtakerunning = false;
-        speed = .5;
+        speed = .25;
         robotHardwareMap.outtakeMotorBack1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robotHardwareMap.outtakeMotorBack2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
@@ -47,7 +47,7 @@ public class Outtake {
     }
 
     public void ControlMotorSpeed() {
-        opMode.telemetry.addLine(String.format("outtakespeed %6.1f", speed));
+        opMode.telemetry.addLine(String.format("outtakespeed %6.3f", speed));
         if (outtakerunning) {
             robotHardwareMap.outtakeMotorBack1.setPower(speed);
             robotHardwareMap.outtakeMotorBack2.setPower(speed);
@@ -60,13 +60,13 @@ public class Outtake {
     }
 
     public void increasemotorspeed() {
-        speed = speed + 0.05;
+        speed = speed + 0.025;
 if (speed>=1)
 { speed = 1; }
     }
 
     public void decreasemotorspeed() {
-        speed = speed - 0.05;
+        speed = speed - 0.025;
         if (speed < .05)
         {
             speed = 0.05;
