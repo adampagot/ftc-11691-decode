@@ -22,10 +22,25 @@ public class AutonBlueDepot extends AutonBase {
 //turn off intake
         sleep(500);
         imuDrive(0.65, -37, 0);
-        imuTurn(0.65, -135);
 //shoot 3 artifacts
         sleep(3000);
-        imuDrive(0.65,34,0);
+        imuTurn(.6,45);
+        imuDrive(.6,21,0);
+        imuTurn(.6,90);
+        //turn on intake
+        imuDrive(.6,37,0);
+        sleep(1000);
+        //turn off intake
+        imuDrive(.6,-37,0);
+        imuTurn(.6,-90);
+        imuDrive(.6,-21,0);
+        imuTurn(.6,-45);
+        //shoot artifacts
+        sleep(3000);
+        imuTurn(.6,45);
+        imuDrive(.6,30,0);
+
+       /* imuDrive(0.65,34,0);
         imuTurn(0.65,135);
         //intake on
         imuDrive(0.65,70,0);
@@ -36,7 +51,7 @@ public class AutonBlueDepot extends AutonBase {
         imuDrive(0.65,-20,0);
         //shoot artifacts
         sleep(3000);
-        imuDrive(.5,-65,0);
+        imuDrive(.5,20,0);*/
 
     }
 }
