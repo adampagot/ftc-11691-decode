@@ -50,7 +50,7 @@ public class camera {
 
         if ((llResult != null) && llResult.isValid()){
             Pose3D botpos = llResult.getBotpose_MT2();
-            opMode.telemetry.addLine(String.format("XYA %6.1f %6.1f  %6.1f ", llResult.getTx(),  llResult.getTy(), llResult.getTa()));
+            opMode.telemetry.addLine(String.format("XYA %6.1f %6.1f  %6.3f ", llResult.getTx(),  llResult.getTy(), llResult.getTa()));
             opMode.telemetry.addData("BotPos", botpos.toString());
             opMode.telemetry.addData("Yaw", botpos.getOrientation().getYaw());
 
