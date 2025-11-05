@@ -151,6 +151,14 @@ public class TeleOpMain extends LinearOpMode {
 
                 outtake.decreasemotorspeed();
             }
+            if (currentGamepad2.dpad_left && !previousGamepad2.dpad_left) {
+
+                Camera.goalcolor(0);
+            }
+            if (currentGamepad2.dpad_right && !previousGamepad2.dpad_right) {
+
+                Camera.goalcolor(1);
+            }
             //Open/close claw1
             /*if (currentGamepad2.left_bumper)
             {

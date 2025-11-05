@@ -15,9 +15,12 @@ import java.util.List;
 public class camera {
     RobotHardwareMap robotHardwareMap;
 
+
     LinearOpMode opMode;
 
     private Limelight3A limelight;
+    private int goalColor;// 0 is 20 blue , 1 is 24 red
+    private LLResult llResult ;
 
     // finish the init method
 
@@ -26,6 +29,7 @@ public class camera {
         this.robotHardwareMap = robotHardwareMap;
         limelight = robotHardwareMap.baseHMap.get(Limelight3A.class, "limelight");
         limelight.pipelineSwitch(0); // 0 is 20, 1 is 24
+        goalColor = 0;
     }
 
     public void start(){
@@ -35,7 +39,15 @@ public class camera {
     public void loop(){
         YawPitchRollAngles orentation = robotHardwareMap.chImu.getRobotYawPitchRollAngles();
         limelight.updateRobotOrientation(orentation.getYaw());
-        LLResult llResult = limelight.getLatestResult();;
+        llResult = limelight.getLatestResult();
+
+        if (goalColor == 0) {
+            opMode.telemetry.addLine("Goal Color Blue");
+        }
+        else {
+            opMode.telemetry.addLine("Goal Color Red");
+        }
+
         if ((llResult != null) && llResult.isValid()){
             Pose3D botpos = llResult.getBotpose_MT2();
             opMode.telemetry.addLine(String.format("XYA %6.1f %6.1f  %6.1f ", llResult.getTx(),  llResult.getTy(), llResult.getTa()));
@@ -48,21 +60,23 @@ public class camera {
     public double Robotallignwithgoal(double twistin) {
         double twistout = twistin;
         double powerFactor = 180; // long range value by default
-        List<AprilTagDetection> currentDetections = robotHardwareMap.aprilTag.getDetections();
 
-        for (AprilTagDetection detection : currentDetections) {
-            if (detection.metadata != null) {
-                if ((detection.id == 20) || (detection.id == 24)) {
-                    if ((detection.ftcPose.x <= 10) && (detection.ftcPose.x >= -10)) {
-                        powerFactor = 90;
-                    }
-                    twistout= (detection.ftcPose.x / powerFactor) ;
-                    //         = twistin;  if you want to conser input from the stick add twist in here
-                    // value of 180 is rough estimate on the width of the camera at max distance it can pick up april tag(inches)
-                }
+        if ((llResult != null) && llResult.isValid()){
+            if ((llResult.getTx() <= 10) && (llResult.getTx() >= -10)) {
+                powerFactor = 90;
             }
+            twistout= (llResult.getTx() / powerFactor) ;
+            //         = twistin;  if you want to conser input from the stick add twist in here
+            // value of 180 is rough estimate on the width of the camera at max distance it can pick up april tag(inches)
 
         }
    return twistout; }
+
+    public void goalcolor (int goalColorIn) {
+        goalColor = goalColorIn;
+        limelight.pipelineSwitch(goalColor); // 0 is 20 blue, 1 is 24 red
+
+
+    }
 
 }
