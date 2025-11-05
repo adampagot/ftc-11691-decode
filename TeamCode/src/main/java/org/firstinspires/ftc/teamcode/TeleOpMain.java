@@ -48,12 +48,12 @@ public class TeleOpMain extends LinearOpMode {
         /*FtcDashboard dashboard = FtcDashboard.getInstance();
         telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());*/
 
-        theHardwareMap.initAprilTag();
 
         telemetry.addData("Robot", "Initialized successfully");
         telemetry.update();
 
         waitForStart();
+        Camera.start();
         telemetry.addData("Robot", "running teleop.. press (Y) For telemetry");
         telemetry.update();
 
@@ -66,7 +66,7 @@ public class TeleOpMain extends LinearOpMode {
       //double currentClaw = 0.8;
         //Main Loop
         while (opModeIsActive()) {
-            theHardwareMap.telemetryAprilTag();
+            Camera.loop();
         //  loopTimeStart = System.currentTimeMillis();
 
            //copy over the previous gamepads so we can compare what changed

@@ -1,7 +1,12 @@
 package org.firstinspires.ftc.teamcode.hardware;
 
+import com.qualcomm.hardware.limelightvision.LLResult;
+import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.IMU;
 
+import org.firstinspires.ftc.robotcore.external.navigation.Pose3D;
+import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 import org.firstinspires.ftc.teamcode.RobotHardwareMap;
 import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 
@@ -10,14 +15,34 @@ import java.util.List;
 public class camera {
     RobotHardwareMap robotHardwareMap;
 
-
     LinearOpMode opMode;
+
+    private Limelight3A limelight;
 
     // finish the init method
 
     public camera(RobotHardwareMap robotHardwareMap, LinearOpMode opMode) {
         this.opMode = opMode;
         this.robotHardwareMap = robotHardwareMap;
+        limelight = robotHardwareMap.baseHMap.get(Limelight3A.class, "limelight");
+        limelight.pipelineSwitch(0); // 0 is 20, 1 is 24
+    }
+
+    public void start(){
+        limelight.start();
+    }
+
+    public void loop(){
+        YawPitchRollAngles orentation = robotHardwareMap.chImu.getRobotYawPitchRollAngles();
+        limelight.updateRobotOrientation(orentation.getYaw());
+        LLResult llResult = limelight.getLatestResult();;
+        if ((llResult != null) && llResult.isValid()){
+            Pose3D botpos = llResult.getBotpose_MT2();
+            opMode.telemetry.addLine(String.format("XYA %6.1f %6.1f  %6.1f ", llResult.getTx(),  llResult.getTy(), llResult.getTa()));
+            opMode.telemetry.addData("BotPos", botpos.toString());
+            opMode.telemetry.addData("Yaw", botpos.getOrientation().getYaw());
+
+        }
     }
 
     public double Robotallignwithgoal(double twistin) {
