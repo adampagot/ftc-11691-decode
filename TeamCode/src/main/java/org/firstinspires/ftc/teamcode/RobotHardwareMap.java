@@ -64,6 +64,7 @@ public class RobotHardwareMap {
 
     public CRServo LeftTransferServo;
     public CRServo RightTransferServo;
+    public CRServo CenterTransferServo;
 
 
 
@@ -107,7 +108,7 @@ public class RobotHardwareMap {
 //        lifterMotor = baseHMap.get(DcMotorEx.class, "Lifter");
         LeftTransferServo = baseHMap.get(CRServo.class,"LTS");
         RightTransferServo = baseHMap.get(CRServo.class,"RTS");
-
+        CenterTransferServo = baseHMap.get(CRServo.class,"CTS");
         //Initializes the IMU
         chImu = baseHMap.get(IMU.class, "chImu");
 
