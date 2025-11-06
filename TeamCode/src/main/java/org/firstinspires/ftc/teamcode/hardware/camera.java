@@ -59,11 +59,11 @@ public class camera {
 
     public double Robotallignwithgoal(double twistin) {
         double twistout = twistin;
-        double powerFactor = 180; // long range value by default
+        double powerFactor = 90; // long range value by default
 
         if ((llResult != null) && llResult.isValid()){
             if ((llResult.getTx() <= 10) && (llResult.getTx() >= -10)) {
-                powerFactor = 90;
+                powerFactor = 35;
             }
             twistout= (llResult.getTx() / powerFactor) ;
             //         = twistin;  if you want to conser input from the stick add twist in here
