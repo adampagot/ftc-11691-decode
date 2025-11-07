@@ -113,8 +113,8 @@ public class RobotHardwareMap {
 
         IMU.Parameters myIMUParamaters = new IMU.Parameters(
                 new RevHubOrientationOnRobot(
-                        RevHubOrientationOnRobot.LogoFacingDirection.BACKWARD,
-                        RevHubOrientationOnRobot.UsbFacingDirection.LEFT
+                        RevHubOrientationOnRobot.LogoFacingDirection.RIGHT,
+                        RevHubOrientationOnRobot.UsbFacingDirection.BACKWARD
                 )
         );
         chImu.initialize(myIMUParamaters);

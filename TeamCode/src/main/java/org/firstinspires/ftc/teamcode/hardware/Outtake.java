@@ -24,8 +24,8 @@ public class Outtake {
     }
 
     public void initialize() {
-        robotHardwareMap.outtakeMotorBack1.setDirection(DcMotorSimple.Direction.FORWARD);
-        robotHardwareMap.outtakeMotorBack2.setDirection(DcMotorSimple.Direction.REVERSE);
+        robotHardwareMap.outtakeMotorBack1.setDirection(DcMotorSimple.Direction.REVERSE);
+        robotHardwareMap.outtakeMotorBack2.setDirection(DcMotorSimple.Direction.FORWARD);
         outtakerunning = false;
         speed = .25;
         robotHardwareMap.outtakeMotorBack1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
