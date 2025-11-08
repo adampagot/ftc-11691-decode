@@ -74,7 +74,6 @@ public class camera {
     }
 
     public double outtakespeedfordistance(double powerin) {
-        List<AprilTagDetection> currentDetections = robotHardwareMap.aprilTag.getDetections();
         double power = powerin;
         double y2 = 124;
         double y1 = 50;
@@ -82,18 +81,13 @@ public class camera {
         double p1 = 0.10;
         double m = (p2 - p1) / (y2 - y1);
         double b = (p2 - (m * y2));
-        for (AprilTagDetection detection : currentDetections) {
-            if (detection.metadata != null) {
-                if ((detection.id == 20) || (detection.id == 24)) {
-                    power= (m*detection.ftcPose.y) + b;
-
-                }
-            }
-
+        if ((llResult != null) && llResult.isValid()){
+            power= (m*llResult.getTa()) + b;
         }
+
         return power;
     }
-}
+
 
     public void goalcolor (int goalColorIn) {
         goalColor = goalColorIn;
