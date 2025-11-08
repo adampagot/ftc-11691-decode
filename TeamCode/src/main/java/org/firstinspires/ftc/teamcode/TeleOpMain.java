@@ -138,6 +138,7 @@ public class TeleOpMain extends LinearOpMode {
             if (currentGamepad2.b) {
 
                 Camera.outtakespeedfordistance(outtake.getspeed());
+                }
 
                 if (currentGamepad2.y) {
 
@@ -200,7 +201,7 @@ public class TeleOpMain extends LinearOpMode {
                 outtake.ControlMotorSpeed();
 
                 telemetry.update();
-            }
+
 
             //  telemetry.addData ("Status", "Stopped");
             //  telemetry.update();
