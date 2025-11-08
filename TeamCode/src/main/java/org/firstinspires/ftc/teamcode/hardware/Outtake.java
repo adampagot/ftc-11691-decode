@@ -122,6 +122,10 @@ if (speed>=1)
         robotHardwareMap.CenterTransferServo.setPower(0);
     }
 
+
+    public double getspeed(){
+        return speed;
+    }
 }
 
 

@@ -70,7 +70,25 @@ public class camera {
             // value of 180 is rough estimate on the width of the camera at max distance it can pick up april tag(inches)
 
         }
-   return twistout; }
+        return twistout;
+    }
+    // y is power
+    // p is area
+    public double outtakespeedfordistance(double powerin) {
+        double power = powerin;
+        double y2 = 1.0;
+        double y1 = 0.5;
+        double p2 = 0.41762;
+        double p1 = 0.40863;
+        double m = (p2 - p1) / (y2 - y1);
+        double b = (p2 - (m * y2));
+        if ((llResult != null) && llResult.isValid()){
+            power= (m*llResult.getTa()) + b;
+        }
+
+        return power;
+    }
+
 
     public void goalcolor (int goalColorIn) {
         goalColor = goalColorIn;
@@ -80,3 +98,4 @@ public class camera {
     }
 
 }
+
