@@ -26,13 +26,13 @@ public class TeleOpMain extends LinearOpMode {
         RobotControlMechanum robotDrive = new RobotControlMechanum(theHardwareMap, this);
         robotDrive.initialize();
 
-        Intake intake = new Intake (theHardwareMap, this);
+        Intake intake = new Intake(theHardwareMap, this);
         intake.initialize();
 
-        Outtake outtake = new Outtake (theHardwareMap, this);
+        Outtake outtake = new Outtake(theHardwareMap, this);
         outtake.initialize();
 
-        camera Camera= new camera (theHardwareMap, this );
+        camera Camera = new camera(theHardwareMap, this);
 
         /*
         RobotControlLights lights = new RobotControlLights(theHardwareMap, this);
@@ -57,19 +57,19 @@ public class TeleOpMain extends LinearOpMode {
         telemetry.addData("Robot", "running teleop.. press (Y) For telemetry");
         telemetry.update();
 
-       // create some gamepads to look at debouncing
+        // create some gamepads to look at debouncing
         Gamepad currentGamepad1 = new Gamepad();
         Gamepad currentGamepad2 = new Gamepad();
         Gamepad previousGamepad1 = new Gamepad();
         Gamepad previousGamepad2 = new Gamepad();
 
-      //double currentClaw = 0.8;
+        //double currentClaw = 0.8;
         //Main Loop
         while (opModeIsActive()) {
             Camera.loop();
-        //  loopTimeStart = System.currentTimeMillis();
+            //  loopTimeStart = System.currentTimeMillis();
 
-           //copy over the previous gamepads so we can compare what changed
+            //copy over the previous gamepads so we can compare what changed
             previousGamepad1.copy(currentGamepad1);
             previousGamepad2.copy(currentGamepad2);
 
@@ -137,35 +137,35 @@ public class TeleOpMain extends LinearOpMode {
 
             if (currentGamepad2.b) {
 
-                Camera.outtakespeedfordistance(.25);
+                Camera.outtakespeedfordistance(outtake.getspeed());
 
-            if (currentGamepad2.y) {
+                if (currentGamepad2.y) {
 
-                outtake.RunSideTransferServo();
-                outtake.RunCenterTransferServer();
+                    outtake.RunSideTransferServo();
+                    outtake.RunCenterTransferServer();
 
-            } else {
-                outtake.StopSideTransferServo();
-                outtake.StopCenterTransferServo();
-            }
+                } else {
+                    outtake.StopSideTransferServo();
+                    outtake.StopCenterTransferServo();
+                }
 
-            if (currentGamepad2.dpad_up && !previousGamepad2.dpad_up) {
+                if (currentGamepad2.dpad_up && !previousGamepad2.dpad_up) {
 
-                outtake.increasemotorspeed();
-            }
-            if (currentGamepad2.dpad_down && !previousGamepad2.dpad_down) {
+                    outtake.increasemotorspeed();
+                }
+                if (currentGamepad2.dpad_down && !previousGamepad2.dpad_down) {
 
-                outtake.decreasemotorspeed();
-            }
-            if (currentGamepad2.dpad_left && !previousGamepad2.dpad_left) {
+                    outtake.decreasemotorspeed();
+                }
+                if (currentGamepad2.dpad_left && !previousGamepad2.dpad_left) {
 
-                Camera.goalcolor(0);
-            }
-            if (currentGamepad2.dpad_right && !previousGamepad2.dpad_right) {
+                    Camera.goalcolor(0);
+                }
+                if (currentGamepad2.dpad_right && !previousGamepad2.dpad_right) {
 
-                Camera.goalcolor(1);
-            }
-            //Open/close claw1
+                    Camera.goalcolor(1);
+                }
+                //Open/close claw1
             /*if (currentGamepad2.left_bumper)
             {
                 clawServo1.moveToPosition(GripperPositions.GRIPPER1_OPEN);
@@ -197,13 +197,14 @@ public class TeleOpMain extends LinearOpMode {
                 theHardwareMap.servoClaw2.setPosition(currentClaw);
             }*/
 
-            outtake.ControlMotorSpeed();
+                outtake.ControlMotorSpeed();
 
-            telemetry.update();
+                telemetry.update();
+            }
+
+            //  telemetry.addData ("Status", "Stopped");
+            //  telemetry.update();
+
         }
-
-        //  telemetry.addData ("Status", "Stopped");
-        //  telemetry.update();
-
     }
 }

@@ -72,13 +72,14 @@ public class camera {
         }
         return twistout;
     }
-
+    // y is power
+    // p is area
     public double outtakespeedfordistance(double powerin) {
         double power = powerin;
-        double y2 = 124;
-        double y1 = 50;
-        double p2 = 0.45;
-        double p1 = 0.10;
+        double y2 = .283;
+        double y1 = .83;
+        double p2 = 0.425;
+        double p1 = 0.405;
         double m = (p2 - p1) / (y2 - y1);
         double b = (p2 - (m * y2));
         if ((llResult != null) && llResult.isValid()){
