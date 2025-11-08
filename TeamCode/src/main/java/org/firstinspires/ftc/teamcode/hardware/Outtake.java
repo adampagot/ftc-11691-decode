@@ -16,6 +16,10 @@ public class Outtake {
     private boolean outtakerunning;
     LinearOpMode opMode;
 
+    private boolean restartouttake;
+
+    private long timeofrestartouttake;
+
     // finish the init method
 
     public Outtake(RobotHardwareMap robotHardwareMap, LinearOpMode opMode) {
@@ -46,7 +50,8 @@ public class Outtake {
         if (outtakerunning) {
             outtakerunning = false;
         } else {
-            outtakerunning = true;
+            restartouttake = true;
+            timeofrestartouttake = System.currentTimeMillis();
         }
 
     }
@@ -58,7 +63,19 @@ public class Outtake {
     }
 
     public void ControlMotorSpeed() {
+        long currenttime;
         opMode.telemetry.addLine(String.format("outtakespeed %6.3f", speed));
+        if (restartouttake) {
+            currenttime = System.currentTimeMillis();
+           if ((currenttime - timeofrestartouttake) > 500){
+               this.StopCenterTransferServo();
+               outtakerunning = true;
+               restartouttake = false;
+           }
+           else {
+               robotHardwareMap.CenterTransferServo.setPower(-1);
+           }
+        }
         if (outtakerunning) {
             robotHardwareMap.outtakeMotorBack1.setPower(speed);
             robotHardwareMap.outtakeMotorBack2.setPower(speed);
