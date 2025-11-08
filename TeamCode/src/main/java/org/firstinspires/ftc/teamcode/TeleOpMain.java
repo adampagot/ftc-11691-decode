@@ -137,10 +137,12 @@ public class TeleOpMain extends LinearOpMode {
 
             if (currentGamepad2.y) {
 
-                outtake.RunTransferServo();
+                outtake.RunSideTransferServo();
+                outtake.RunCenterTransferServer();
 
             } else {
-                outtake.StopTransferServo();
+                outtake.StopSideTransferServo();
+                outtake.StopCenterTransferServo();
             }
 
             if (currentGamepad2.dpad_up && !previousGamepad2.dpad_up) {
