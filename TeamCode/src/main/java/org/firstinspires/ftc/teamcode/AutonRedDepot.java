@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.hardware.LynxModuleImuType;
 
 @Autonomous(name = "Auton Red Depot", group = "Autons")
 public class AutonRedDepot extends AutonBase {
@@ -9,34 +10,30 @@ public class AutonRedDepot extends AutonBase {
 
     @Override
     public void runOpMode() {
-
         initialize();
 
         waitForStart();
-
         //get angle on goal
         imuDrive(imuSpeed,53,0);
 
         //score preloaded artifacts
         sleep(3000);
-
-        //go get more
-        imuTurn(imuSpeed, -135);
+        imuTurn(imuSpeed, 135);
         imuDrive(imuSpeed,37,0);
 
         // Turn on intake
         sleep(500);
-         //turn off intake
+        //turn off intake
         sleep(500);
 
         //go to score
         imuDrive(imuSpeed, -37, 0);
-        imuTurn(imuSpeed, 135);
+        imuTurn(imuSpeed, -135);
 
         //shoot 3 artifacts
         sleep(3000);
 
-        //go get more
+        //go to get more
         imuTurn(imuSpeed,-45);
         imuDrive(imuSpeed,21,0);
         imuTurn(imuSpeed,-90);
@@ -60,3 +57,5 @@ public class AutonRedDepot extends AutonBase {
         imuDrive(imuSpeed,30,0);
     }
 }
+
+
