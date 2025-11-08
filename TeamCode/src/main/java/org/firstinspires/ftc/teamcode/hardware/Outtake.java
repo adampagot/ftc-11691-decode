@@ -24,8 +24,8 @@ public class Outtake {
     }
 
     public void initialize() {
-        robotHardwareMap.outtakeMotorBack1.setDirection(DcMotorSimple.Direction.FORWARD);
-        robotHardwareMap.outtakeMotorBack2.setDirection(DcMotorSimple.Direction.REVERSE);
+        robotHardwareMap.outtakeMotorBack1.setDirection(DcMotorSimple.Direction.REVERSE);
+        robotHardwareMap.outtakeMotorBack2.setDirection(DcMotorSimple.Direction.FORWARD);
         outtakerunning = false;
         speed = .25;
         robotHardwareMap.outtakeMotorBack1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -83,18 +83,27 @@ if (speed>=1)
             speed = 0.05;
         }
     }
-        public void RunTransferServo () {
+    public void RunSideTransferServo () {
         robotHardwareMap.LeftTransferServo.setDirection(CRServo.Direction.FORWARD);
-            robotHardwareMap.RightTransferServo.setDirection(CRServo.Direction.FORWARD);
-            robotHardwareMap.LeftTransferServo.setPower(-1);
-            robotHardwareMap.RightTransferServo.setPower(1);
+        robotHardwareMap.RightTransferServo.setDirection(CRServo.Direction.FORWARD);
 
-        }
+        robotHardwareMap.LeftTransferServo.setPower(-1);
+        robotHardwareMap.RightTransferServo.setPower(1);
+    }
 
-        public void StopTransferServo () {
+    public void StopSideTransferServo () {
         robotHardwareMap.LeftTransferServo.setPower(0);
-            robotHardwareMap.RightTransferServo.setPower(0);
-        }
+        robotHardwareMap.RightTransferServo.setPower(0);
+    }
+
+    public void RunCenterTransferServer (){
+        robotHardwareMap.CenterTransferServo.setDirection(CRServo.Direction.FORWARD);
+        robotHardwareMap.CenterTransferServo.setPower(1);
+    }
+
+    public void StopCenterTransferServo () {
+        robotHardwareMap.CenterTransferServo.setPower(0);
+    }
 
 }
 

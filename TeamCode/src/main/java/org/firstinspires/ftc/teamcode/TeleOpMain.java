@@ -48,12 +48,12 @@ public class TeleOpMain extends LinearOpMode {
         /*FtcDashboard dashboard = FtcDashboard.getInstance();
         telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());*/
 
-        theHardwareMap.initAprilTag();
 
         telemetry.addData("Robot", "Initialized successfully");
         telemetry.update();
 
         waitForStart();
+        Camera.start();
         telemetry.addData("Robot", "running teleop.. press (Y) For telemetry");
         telemetry.update();
 
@@ -66,7 +66,7 @@ public class TeleOpMain extends LinearOpMode {
       //double currentClaw = 0.8;
         //Main Loop
         while (opModeIsActive()) {
-            theHardwareMap.telemetryAprilTag();
+            Camera.loop();
         //  loopTimeStart = System.currentTimeMillis();
 
            //copy over the previous gamepads so we can compare what changed
@@ -141,10 +141,12 @@ public class TeleOpMain extends LinearOpMode {
 
             if (currentGamepad2.y) {
 
-                outtake.RunTransferServo();
+                outtake.RunSideTransferServo();
+                outtake.RunCenterTransferServer();
 
             } else {
-                outtake.StopTransferServo();
+                outtake.StopSideTransferServo();
+                outtake.StopCenterTransferServo();
             }
 
             if (currentGamepad2.dpad_up && !previousGamepad2.dpad_up) {
@@ -154,6 +156,14 @@ public class TeleOpMain extends LinearOpMode {
             if (currentGamepad2.dpad_down && !previousGamepad2.dpad_down) {
 
                 outtake.decreasemotorspeed();
+            }
+            if (currentGamepad2.dpad_left && !previousGamepad2.dpad_left) {
+
+                Camera.goalcolor(0);
+            }
+            if (currentGamepad2.dpad_right && !previousGamepad2.dpad_right) {
+
+                Camera.goalcolor(1);
             }
             //Open/close claw1
             /*if (currentGamepad2.left_bumper)
