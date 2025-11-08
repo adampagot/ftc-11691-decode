@@ -76,10 +76,10 @@ public class camera {
     // p is area
     public double outtakespeedfordistance(double powerin) {
         double power = powerin;
-        double y2 = .283;
-        double y1 = .83;
-        double p2 = 0.425;
-        double p1 = 0.405;
+        double y2 = 1.0;
+        double y1 = 0.5;
+        double p2 = 0.41762;
+        double p1 = 0.40863;
         double m = (p2 - p1) / (y2 - y1);
         double b = (p2 - (m * y2));
         if ((llResult != null) && llResult.isValid()){
