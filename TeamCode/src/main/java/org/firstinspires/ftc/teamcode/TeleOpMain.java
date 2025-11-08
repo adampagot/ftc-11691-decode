@@ -124,6 +124,10 @@ public class TeleOpMain extends LinearOpMode {
             /***************
              * Gamepad 2
              */
+            if (currentGamepad2.left_trigger > 0.50 && previousGamepad2.left_trigger<=0.50) {
+                intake.off();
+                outtake.outtakeoff();
+            }
             if (currentGamepad2.a && !previousGamepad2.a) {
 
                 intake.Toggle();
