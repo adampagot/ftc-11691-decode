@@ -137,7 +137,7 @@ public class TeleOpMain extends LinearOpMode {
 
             if (currentGamepad2.b) {
 
-                Camera.outtakespeedfordistance(outtake.getspeed());
+                outtake.setSpeed(Camera.outtakespeedfordistance(outtake.getspeed()));
                 }
 
                 if (currentGamepad2.y) {
