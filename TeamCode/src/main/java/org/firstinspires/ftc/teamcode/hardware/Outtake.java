@@ -71,13 +71,13 @@ public class Outtake {
     }
 
     public void increasemotorspeed() {
-        speed = speed + 0.025;
+        speed = speed + 0.005;
 if (speed>=1)
 { speed = 1; }
     }
 
     public void decreasemotorspeed() {
-        speed = speed - 0.025;
+        speed = speed - 0.005;
         if (speed < .05)
         {
             speed = 0.05;
