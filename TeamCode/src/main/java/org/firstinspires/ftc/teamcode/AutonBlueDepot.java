@@ -13,11 +13,16 @@ public class AutonBlueDepot extends AutonBase {
         initialize();
 
         waitForStart();
+        outtake.outtakeon();
         //get angle on goal
         imuDrive(imuSpeed,53,0);
 
         //score preloaded artifacts
-        sleep(3000);
+        outtake.blockingShoot();
+
+        outtake.outtakeoff();
+        intake.on();
+
         imuTurn(imuSpeed, 135);
         imuDrive(imuSpeed,37,0);
 

@@ -56,7 +56,10 @@ public class Outtake {
 
     }
     public void outtakeon() {
-            outtakerunning = true;
+        if (!outtakerunning && !restartouttake) {// only start outtake if its not running
+            restartouttake = true;
+            timeofrestartouttake = System.currentTimeMillis();
+        }
     }
     public void outtakeoff() {
         outtakerunning = false;
@@ -125,6 +128,16 @@ if (speed>=1)
 
     public double getspeed(){
         return speed;
+    }
+
+    public void blockingShoot(){
+        //can we tell if the outtake is at speed?
+
+        RunSideTransferServo();
+        StopSideTransferServo();
+        opMode.sleep(3000);
+        RunSideTransferServo();
+        StopCenterTransferServo();
     }
 }
 
