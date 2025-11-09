@@ -335,8 +335,10 @@ public class AutonBase extends LinearOpMode {
         resetHeading();
     }
 
-    public void aprilTagAlignment(){
+    public void aprilTagOutakeSpeedAdjustAndAlignment(){
         double turnSpeed = 1;
+        Camera.loop();
+        outtake.setSpeed(Camera.outtakespeedfordistance(outtake.getspeed()));
         while (opModeIsActive() && (turnSpeed > 0.3)) {
             Camera.loop();
             turnSpeed = Camera.Robotallignwithgoal(0);

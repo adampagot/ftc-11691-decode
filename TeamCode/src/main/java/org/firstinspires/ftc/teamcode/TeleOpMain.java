@@ -124,52 +124,52 @@ public class TeleOpMain extends LinearOpMode {
             /***************
              * Gamepad 2
              */
+            // left triger press- stop intake and outtake
             if (currentGamepad2.left_trigger > 0.50 && previousGamepad2.left_trigger<=0.50) {
                 intake.off();
                 outtake.outtakeoff();
             }
+
+            // a press = toggle intake
             if (currentGamepad2.a && !previousGamepad2.a) {
-
                 intake.Toggle();
-
             }
 
+            // x press - toggle outtake
             if (currentGamepad2.x && !previousGamepad2.x) {
-
                 outtake.ToggleOuttakeMotor();
             }
 
+            // while b is down adjust outtake speed based on camera
             if (currentGamepad2.b) {
-
                 outtake.setSpeed(Camera.outtakespeedfordistance(outtake.getspeed()));
-                }
+            }
 
-                if (currentGamepad2.y) {
+            if (currentGamepad2.y) {
+                outtake.RunSideTransferServo();
+                outtake.RunCenterTransferServer();
 
-                    outtake.RunSideTransferServo();
-                    outtake.RunCenterTransferServer();
+            } else {
+                outtake.StopSideTransferServo();
+                outtake.StopCenterTransferServo();
+            }
 
-                } else {
-                    outtake.StopSideTransferServo();
-                    outtake.StopCenterTransferServo();
-                }
+            if (currentGamepad2.dpad_up && !previousGamepad2.dpad_up) {
 
-                if (currentGamepad2.dpad_up && !previousGamepad2.dpad_up) {
+                outtake.increasemotorspeed();
+            }
+            if (currentGamepad2.dpad_down && !previousGamepad2.dpad_down) {
 
-                    outtake.increasemotorspeed();
-                }
-                if (currentGamepad2.dpad_down && !previousGamepad2.dpad_down) {
+                outtake.decreasemotorspeed();
+            }
+            if (currentGamepad2.dpad_left && !previousGamepad2.dpad_left) {
 
-                    outtake.decreasemotorspeed();
-                }
-                if (currentGamepad2.dpad_left && !previousGamepad2.dpad_left) {
+                Camera.goalcolor(0);
+            }
+            if (currentGamepad2.dpad_right && !previousGamepad2.dpad_right) {
 
-                    Camera.goalcolor(0);
-                }
-                if (currentGamepad2.dpad_right && !previousGamepad2.dpad_right) {
-
-                    Camera.goalcolor(1);
-                }
+                Camera.goalcolor(1);
+            }
                 //Open/close claw1
             /*if (currentGamepad2.left_bumper)
             {

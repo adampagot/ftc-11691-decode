@@ -22,7 +22,7 @@ public class AutonBlueDepot extends AutonBase {
         imuDrive(imuSpeed,53,0);
 
         //score preloaded artifacts
-        aprilTagAlignment();
+        aprilTagOutakeSpeedAdjustAndAlignment();
         outtake.blockingShoot();
 
         outtake.outtakeoff();
