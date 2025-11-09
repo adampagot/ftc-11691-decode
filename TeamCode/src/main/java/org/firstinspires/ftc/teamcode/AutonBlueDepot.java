@@ -36,6 +36,9 @@ public class AutonBlueDepot extends AutonBase {
         //turn off intake
         sleep(500);
 
+        intake.off();
+        outtake.outtakeonAfterIntake();
+
         //go to score
         imuDrive(imuSpeed, -37, 0);
         imuTurn(imuSpeed, -135);
