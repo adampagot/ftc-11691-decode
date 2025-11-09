@@ -335,36 +335,20 @@ public class AutonBase extends LinearOpMode {
         resetHeading();
     }
 
-    /*public void aprilTagAlignment(int tagNumber){
-        List<AprilTagDetection> currentDetections = aprilTagProcessor.getDetections();
-
-        for (AprilTagDetection detection : currentDetections) {
-            //update the lights that we found one
-
-            //If we found something, display the data for it
-            if (detection.ftcPose != null) {
-                telemetry.addData("Tag Bearing", detection.ftcPose.bearing);
-                telemetry.addData("Tag Range", detection.ftcPose.range);
-                telemetry.addData("Tag Yaw", detection.ftcPose.yaw);
-                telemetry.addData("ID", detection.id);
-
-            }
-            //If we detect a specific apriltag and they are pressing X, then we are twisting to that angle
-            if (detection.id == tagNumber) {
-                telemetry.addData("Driveauto", detection.id);
-                double twistAmount = 0.25;
-                //adjust the twist based on the amount of yaw
-                //tweak the color for 5 and or 2
-                //add support for finding 2
-                //test other buttons for ease of use
-
-                if (detection.ftcPose.yaw >= 0) {
-                    twistAmount = twistAmount * -1;
-                }
-                moveRobot(0, twistAmount);
-            }
+    public void aprilTagAlignment(){
+        double turnSpeed = 1;
+        while (opModeIsActive() && (turnSpeed > 0.3)) {
+            Camera.loop();
+            turnSpeed = Camera.Robotallignwithgoal(0);
+            moveRobot(0, turnSpeed);
+            outtake.ControlMotorSpeed();
         }
-    }*/
+
+
+        // Stop all motion;
+        moveRobot(0, 0);
+        resetHeading();
+    }
 
     private void moveRobot(double drive, double turn) {
         driveSpeed = drive;     // save this value as a class member so it can be used by telemetry.

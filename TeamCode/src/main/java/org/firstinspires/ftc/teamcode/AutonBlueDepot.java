@@ -11,13 +11,18 @@ public class AutonBlueDepot extends AutonBase {
     @Override
     public void runOpMode() {
         initialize();
+        Camera.goalcolor(0); // 0 is blue, 1 is red
 
         waitForStart();
+        Camera.start();
+        Camera.loop();
+
         outtake.outtakeon();
         //get angle on goal
         imuDrive(imuSpeed,53,0);
 
         //score preloaded artifacts
+        aprilTagAlignment();
         outtake.blockingShoot();
 
         outtake.outtakeoff();
