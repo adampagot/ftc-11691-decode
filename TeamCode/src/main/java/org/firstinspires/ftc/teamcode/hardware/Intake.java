@@ -54,8 +54,3 @@ public void on () {
         robotHardwareMap.intakeMotorFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 }
-
-
-
-
-

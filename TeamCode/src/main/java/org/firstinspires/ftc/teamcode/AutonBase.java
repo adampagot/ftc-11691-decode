@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
 import android.util.Log;
-import android.util.Size;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -12,24 +11,22 @@ import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
-//import org.firstinspires.ftc.teamcode.hardware.Light;
-//import org.firstinspires.ftc.teamcode.hardware.LightMode;
-//import org.firstinspires.ftc.teamcode.hardware.RobotControlArm;
-//import org.firstinspires.ftc.teamcode.hardware.RobotControlFlipperMotor;
-//import org.firstinspires.ftc.teamcode.hardware.RobotControlGripperServos;
-//import org.firstinspires.ftc.teamcode.hardware.RobotControlLights;
-//import org.firstinspires.ftc.vision.VisionPortal;
-//import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
-import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
-
-import java.util.List;
+import org.firstinspires.ftc.teamcode.hardware.Intake;
+import org.firstinspires.ftc.teamcode.hardware.Outtake;
+import org.firstinspires.ftc.teamcode.hardware.camera;
 
 public class AutonBase extends LinearOpMode {
 
     /* Declare OpMode members. */
     RobotHardwareMap theHardwareMap;
-    AprilTagProcessor aprilTagProcessor;
- //   VisionPortal visionPortal;
+    Intake intake;
+
+
+    Outtake outtake;
+
+
+    camera Camera;
+
 
     private IMU imu         = null;
 
@@ -82,7 +79,13 @@ public class AutonBase extends LinearOpMode {
 
 
         imu = theHardwareMap.chImu;
+        intake = new Intake (theHardwareMap, this);
+        intake.initialize();
 
+        outtake = new Outtake (theHardwareMap, this);
+        outtake.initialize();
+
+        Camera= new camera (theHardwareMap, this );
         theHardwareMap.backLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         theHardwareMap.backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         theHardwareMap.frontLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);

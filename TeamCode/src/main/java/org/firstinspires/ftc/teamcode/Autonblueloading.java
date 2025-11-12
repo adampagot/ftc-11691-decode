@@ -1,7 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-
+import org.firstinspires.ftc.teamcode.hardware.Intake;
+import org.firstinspires.ftc.teamcode.hardware.Outtake;
 @Autonomous(name = "Auton Blue Loading", group = "Autons")
 public class Autonblueloading extends AutonBase {
     double imuSpeed = 0.7;

@@ -121,7 +121,7 @@ if (speed>=1)
     public void StopCenterTransferServo () {
         robotHardwareMap.CenterTransferServo.setPower(0);
     }
-
+    public void outtakeonAfterIntake() {
 }
 
 
