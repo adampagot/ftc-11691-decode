@@ -34,6 +34,8 @@ public class TeleOpMain extends LinearOpMode {
 
         camera Camera= new camera (theHardwareMap, this );
 
+        boolean slowMode = true;
+
         /*
         RobotControlLights lights = new RobotControlLights(theHardwareMap, this);
         RobotControlLifter liftMotor = new RobotControlLifter(theHardwareMap,this);
@@ -81,6 +83,26 @@ public class TeleOpMain extends LinearOpMode {
             double strafe = -1 * gamepad1.left_trigger + gamepad1.right_trigger;
             //double strafe = gamepad1.left_stick_x;
             double twist = gamepad1.right_stick_x;
+
+
+            //Speed values for slow mode
+            if (slowMode) {
+                drive *= 0.4;
+                strafe *= 0.4;
+                twist *= 0.4;
+
+            } else { // non slow mode is only 75% power
+                drive *= .7;
+                strafe *= .7;
+                twist *= .7;
+            }
+
+            //slow mode
+            if (currentGamepad1.left_bumper && !previousGamepad1.left_bumper) {
+                slowMode = true;
+            } else if (currentGamepad1.right_bumper && !previousGamepad1.right_bumper) {
+                slowMode = false;
+            }
 
 
             if (currentGamepad1.b) {
