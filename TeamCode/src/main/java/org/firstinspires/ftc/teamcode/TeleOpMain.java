@@ -90,11 +90,10 @@ public class TeleOpMain extends LinearOpMode {
                 drive *= 0.45;
                 strafe *= 0.45;
                 twist *= 0.45;
-
-            } else { // non slow mode is only 75% power
-                drive *= 1;
-                strafe *= 1;
-                twist *= 1;
+            } else {
+                drive *= .9;
+                strafe *= .9;
+                twist *= .9;
             }
 
             //slow mode
@@ -109,17 +108,6 @@ public class TeleOpMain extends LinearOpMode {
                 twist = Camera.Robotallignwithgoal(twist);
             }
 
-            //Speed values for slow mode
-          /*  if (slowMode) {
-                drive *= 0.6;
-                strafe *= 0.6;
-                twist *= 0.6;
-
-            } else { // non slow mode is only 75% power
-                drive *= 1;
-                strafe *= 1;
-                twist *= 1;
-            }*/
 
             robotDrive.teleOpMechanum(drive, strafe, twist);
 
