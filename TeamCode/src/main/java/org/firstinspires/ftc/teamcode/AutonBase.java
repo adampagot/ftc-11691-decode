@@ -352,6 +352,12 @@ public class AutonBase extends LinearOpMode {
         resetHeading();
     }
 
+    public void transferAndLaunchArtifacts() {
+        aprilTagOutakeSpeedAdjustAndAlignment();
+        outtake.blockingShoot();
+        outtake.outtakeoff();
+    }
+
     private void moveRobot(double drive, double turn) {
         driveSpeed = drive;     // save this value as a class member so it can be used by telemetry.
         turnSpeed  = turn;      // save this value as a class member so it can be used by telemetry.
