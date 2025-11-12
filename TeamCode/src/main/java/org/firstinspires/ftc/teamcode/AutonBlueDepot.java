@@ -24,37 +24,34 @@ public class AutonBlueDepot extends AutonBase {
         //score preloaded artifacts
         aprilTagOutakeSpeedAdjustAndAlignment();
         outtake.blockingShoot();
-
         outtake.outtakeoff();
         intake.on();
 
         imuTurn(imuSpeed, 135);
         imuDrive(imuSpeed,37,0);
 
-        // Turn on intake
-        sleep(500);
-        //turn off intake
-        sleep(500);
-
         intake.off();
+
         outtake.outtakeonAfterIntake();
 
         //go to score
         imuDrive(imuSpeed, -37, 0);
         imuTurn(imuSpeed, -135);
 
-        //shoot 3 artifacts
-        sleep(3000);
+        aprilTagOutakeSpeedAdjustAndAlignment();
+        outtake.blockingShoot();
+        outtake.outtakeoff();
+
+        intake.on();
 
         //go to get more
         imuTurn(imuSpeed,45);
         imuDrive(imuSpeed,21,0);
         imuTurn(imuSpeed,90);
 
-        //turn on intake
         imuDrive(imuSpeed,37,0);
-        sleep(1000);
-        //turn off intake
+        intake.off();
+        outtake.outtakeonAfterIntake();
 
         //go to score
         imuDrive(imuSpeed,-37,0);
@@ -62,8 +59,9 @@ public class AutonBlueDepot extends AutonBase {
         imuDrive(imuSpeed,-21,0);
         imuTurn(imuSpeed,-45);
 
-        //shoot artifacts
-        sleep(3000);
+        aprilTagOutakeSpeedAdjustAndAlignment();
+        outtake.blockingShoot();
+        outtake.outtakeoff();
 
         //drive outside launch line for rp
         imuTurn(imuSpeed,45);

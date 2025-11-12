@@ -155,9 +155,9 @@ if (speed>=1)
         //can we tell if the outtake is at speed?
 
         RunSideTransferServo();
-        StopSideTransferServo();
+        RunCenterTransferServer();
         opMode.sleep(3000);
-        RunSideTransferServo();
+        StopSideTransferServo();
         StopCenterTransferServo();
     }
 }
