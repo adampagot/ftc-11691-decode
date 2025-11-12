@@ -40,8 +40,8 @@ public class Outtake {
     public void setSpeed(double speed_in) {
         speed = speed_in;
         if (speed >= 1) {
-            speed = 1;}
-        else if (speed <= .01) {
+            speed = 1;
+        } else if (speed <= .01) {
             speed = .01;
         }
     }
@@ -55,9 +55,11 @@ public class Outtake {
         }
 
     }
+
     public void outtakeon() {
-            outtakerunning = true;
+        outtakerunning = true;
     }
+
     public void outtakeoff() {
         outtakerunning = false;
     }
@@ -67,14 +69,13 @@ public class Outtake {
         opMode.telemetry.addLine(String.format("outtakespeed %6.3f", speed));
         if (restartouttake) {
             currenttime = System.currentTimeMillis();
-           if ((currenttime - timeofrestartouttake) > 500){
-               this.StopCenterTransferServo();
-               outtakerunning = true;
-               restartouttake = false;
-           }
-           else {
-               robotHardwareMap.CenterTransferServo.setPower(-1);
-           }
+            if ((currenttime - timeofrestartouttake) > 500) {
+                this.StopCenterTransferServo();
+                outtakerunning = true;
+                restartouttake = false;
+            } else {
+                robotHardwareMap.CenterTransferServo.setPower(-1);
+            }
         }
         if (outtakerunning) {
             robotHardwareMap.outtakeMotorBack1.setPower(speed);
@@ -89,18 +90,19 @@ public class Outtake {
 
     public void increasemotorspeed() {
         speed = speed + 0.005;
-if (speed>=1)
-{ speed = 1; }
+        if (speed >= 1) {
+            speed = 1;
+        }
     }
 
     public void decreasemotorspeed() {
         speed = speed - 0.005;
-        if (speed < .05)
-        {
+        if (speed < .05) {
             speed = 0.05;
         }
     }
-    public void RunSideTransferServo () {
+
+    public void RunSideTransferServo() {
         robotHardwareMap.LeftTransferServo.setDirection(CRServo.Direction.FORWARD);
         robotHardwareMap.RightTransferServo.setDirection(CRServo.Direction.FORWARD);
 
@@ -108,20 +110,22 @@ if (speed>=1)
         robotHardwareMap.RightTransferServo.setPower(1);
     }
 
-    public void StopSideTransferServo () {
+    public void StopSideTransferServo() {
         robotHardwareMap.LeftTransferServo.setPower(0);
         robotHardwareMap.RightTransferServo.setPower(0);
     }
 
-    public void RunCenterTransferServer (){
+    public void RunCenterTransferServer() {
         robotHardwareMap.CenterTransferServo.setDirection(CRServo.Direction.FORWARD);
         robotHardwareMap.CenterTransferServo.setPower(1);
     }
 
-    public void StopCenterTransferServo () {
+    public void StopCenterTransferServo() {
         robotHardwareMap.CenterTransferServo.setPower(0);
     }
+
     public void outtakeonAfterIntake() {
+    }
 }
 
 
