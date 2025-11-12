@@ -87,14 +87,14 @@ public class TeleOpMain extends LinearOpMode {
 
             //Speed values for slow mode
             if (slowMode) {
-                drive *= 0.4;
-                strafe *= 0.4;
-                twist *= 0.4;
+                drive *= 0.45;
+                strafe *= 0.45;
+                twist *= 0.45;
 
             } else { // non slow mode is only 75% power
-                drive *= .7;
-                strafe *= .7;
-                twist *= .7;
+                drive *= 1;
+                strafe *= 1;
+                twist *= 1;
             }
 
             //slow mode
