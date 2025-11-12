@@ -23,13 +23,14 @@ public class AutonBlueDepot extends AutonBase {
         imuDrive(imuSpeed,53,0);
 
         //score preloaded artifacts
+        sleep (1000);
         transferAndLaunchArtifacts();
         intake.on();
 
         imuTurn(imuSpeed, 135);
         imuDrive(0.3,44,0);
 
-        sleep(500);
+        sleep(700);
         intake.off();
         outtake.outtakeonAfterIntake();
 
@@ -43,11 +44,13 @@ public class AutonBlueDepot extends AutonBase {
         //go to get more
         imuTurn(imuSpeed,45);
         imuDrive(imuSpeed,21,0);
-        imuTurn(imuSpeed,90);
+        imuTurn(imuSpeed,92);
 
         imuDrive(0.3,54,0);
-        sleep (600);// let the intake intake the artifacts
+        sleep (1000);// let the intake intake the artifacts
         intake.off();
+
+        /* ran out of time so stop after intakeing 3 artifatics
         outtake.outtakeonAfterIntake();
 
         //go to score
@@ -60,7 +63,7 @@ public class AutonBlueDepot extends AutonBase {
 
         //drive outside launch line for rp
         imuTurn(imuSpeed,45);
-        imuDrive(imuSpeed,30,0);
+        imuDrive(imuSpeed,30,0);*/
     }
 }
 
