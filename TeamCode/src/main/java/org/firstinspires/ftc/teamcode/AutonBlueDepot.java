@@ -5,8 +5,9 @@ import com.qualcomm.robotcore.hardware.LynxModuleImuType;
 
 @Autonomous(name = "Auton Blue Depot", group = "Autons")
 public class AutonBlueDepot extends AutonBase {
+    // Robot starts with back against center of blue depot
 
-    double imuSpeed = .7;
+    double imuSpeed = 0.7;
 
     @Override
     public void runOpMode() {
@@ -26,13 +27,14 @@ public class AutonBlueDepot extends AutonBase {
         intake.on();
 
         imuTurn(imuSpeed, 135);
-        imuDrive(imuSpeed,37,0);
+        imuDrive(0.3,44,0);
 
+        sleep(500);
         intake.off();
         outtake.outtakeonAfterIntake();
 
         //go to score
-        imuDrive(imuSpeed, -37, 0);
+        imuDrive(imuSpeed, -44, 0);
         imuTurn(imuSpeed, -135);
 
         transferAndLaunchArtifacts();
@@ -43,12 +45,13 @@ public class AutonBlueDepot extends AutonBase {
         imuDrive(imuSpeed,21,0);
         imuTurn(imuSpeed,90);
 
-        imuDrive(imuSpeed,37,0);
+        imuDrive(0.3,54,0);
+        sleep (600);// let the intake intake the artifacts
         intake.off();
         outtake.outtakeonAfterIntake();
 
         //go to score
-        imuDrive(imuSpeed,-37,0);
+        imuDrive(imuSpeed,-54,0);
         imuTurn(imuSpeed,-90);
         imuDrive(imuSpeed,-21,0);
         imuTurn(imuSpeed,-45);
