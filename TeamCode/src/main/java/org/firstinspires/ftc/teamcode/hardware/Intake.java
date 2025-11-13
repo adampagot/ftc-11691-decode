@@ -22,6 +22,7 @@ public class Intake {
     }
     public void initialize(){
        robotHardwareMap.intakeMotorFront.setDirection(DcMotorSimple.Direction.REVERSE);
+       robotHardwareMap.intakeMotorFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
      }
 
 
