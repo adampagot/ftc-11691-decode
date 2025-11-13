@@ -339,7 +339,7 @@ public class AutonBase extends LinearOpMode {
         double turnSpeed = 1;
         Camera.loop();
         outtake.setSpeed(Camera.outtakespeedfordistance(outtake.getspeed()));
-        while (opModeIsActive() && (turnSpeed > 0.3)) {
+/*        while (opModeIsActive() && (turnSpeed > 0.3)) {
             Camera.loop();
             turnSpeed = Camera.Robotallignwithgoal(0);
             moveRobot(0, turnSpeed);
@@ -349,7 +349,7 @@ public class AutonBase extends LinearOpMode {
 
         // Stop all motion;
         moveRobot(0, 0);
-        resetHeading();
+        resetHeading();*/
     }
 
     public void transferAndLaunchArtifacts() {
