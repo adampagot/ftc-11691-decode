@@ -86,13 +86,7 @@ public class AutonBase extends LinearOpMode {
 
 
         imu = theHardwareMap.chImu;
-        intake = new Intake (theHardwareMap, this);
-        intake.initialize();
 
-        outtake = new Outtake (theHardwareMap, this);
-        outtake.initialize();
-
-        Camera= new camera (theHardwareMap, this );
         theHardwareMap.backLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
         theHardwareMap.backRightMotor.setDirection(DcMotorSimple.Direction.REVERSE);
         theHardwareMap.frontLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);

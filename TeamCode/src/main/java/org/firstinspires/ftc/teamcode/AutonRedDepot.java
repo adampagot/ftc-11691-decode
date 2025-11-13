@@ -9,7 +9,6 @@ public class AutonRedDepot extends AutonBase {
 
     double imuSpeed = 0.7;
 
-    private void transferAndLaunchArtifacts() {}
 
     @Override
     public void runOpMode() {

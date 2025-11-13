@@ -34,7 +34,7 @@ public class TeleOpMain extends LinearOpMode {
 
         camera Camera = new camera(theHardwareMap, this);
 
-        boolean slowMode = true;
+        boolean slowMode = false;
 
         /*
         RobotControlLights lights = new RobotControlLights(theHardwareMap, this);
@@ -91,9 +91,9 @@ public class TeleOpMain extends LinearOpMode {
                 strafe *= 0.45;
                 twist *= 0.45;
             } else {
-                drive *= .9;
-                strafe *= .9;
-                twist *= .9;
+                drive *= 0.9;
+                strafe *= 0.9;
+                twist *= 0.9;
             }
 
             //slow mode
