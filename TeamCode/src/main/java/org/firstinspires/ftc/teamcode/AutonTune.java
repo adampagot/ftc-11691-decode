@@ -11,18 +11,23 @@ public class AutonTune extends AutonBase {
     public void runOpMode(){
 
         initialize();
-
+        Camera.goalcolor(0); // 0 is blue, 1 is red
         while (opModeInInit()) {
         }
 
         waitForStart();
-
+        Camera.start();
+        Camera.loop();
+        Camera.loop();
+        aprilTagOutakeSpeedAdjustAndAlignment();
+/*
         testForwardAndBack();
         sleep(briefPause);
         testTurn(0.5, 90);
         sleep(briefPause);
         testSquare();
-
+*/
+    //    testIntake();
         // Encoder strafe does NOT use IMU and is too inaccurate to use when wheels slip
         //encoderStrafe(0.5 ,-80,25000);
 
@@ -53,5 +58,16 @@ public class AutonTune extends AutonBase {
         imuDrive(testDriveSpeed, 40, 0);
         sleep(briefPause);
         imuTurn(testDriveSpeed, 90);
+    }
+
+    public void testIntake() {
+        intake.on();
+        // drive forward and pick up three artifacts
+        imuDrive(testDriveSpeed,37,0);
+
+        sleep(briefPause);
+
+        // return to original position
+        imuDrive(testDriveSpeed,-37,0);
     }
 }
