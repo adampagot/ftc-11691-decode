@@ -9,8 +9,6 @@ public class AutonBlueDepot extends AutonBase {
 
     double imuSpeed = 0.7;
 
-    private void transferAndLaunchArtifacts() {}
-
     @Override
     public void runOpMode() {
         initialize();
@@ -51,6 +49,7 @@ public class AutonBlueDepot extends AutonBase {
         imuDrive(0.3,54,0);
         sleep (1000);// let the intake intake the artifacts
         intake.off();
+
 
         /* ran out of time so stop after intakeing 3 artifatics
         outtake.outtakeonAfterIntake();

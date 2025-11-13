@@ -17,6 +17,7 @@ public class Outtake {
     LinearOpMode opMode;
 
     private boolean restartouttake;
+    private boolean waitForIntakeToStopThenRestartOuttake;
 
     private long timeofrestartouttake;
 
@@ -31,9 +32,13 @@ public class Outtake {
         robotHardwareMap.outtakeMotorBack1.setDirection(DcMotorSimple.Direction.REVERSE);
         robotHardwareMap.outtakeMotorBack2.setDirection(DcMotorSimple.Direction.FORWARD);
         outtakerunning = false;
-        speed = .385;
+        restartouttake = false;
+        waitForIntakeToStopThenRestartOuttake = false;
+        speed = .412;
         robotHardwareMap.outtakeMotorBack1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robotHardwareMap.outtakeMotorBack2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robotHardwareMap.outtakeMotorBack1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        robotHardwareMap.outtakeMotorBack2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
 
@@ -57,7 +62,18 @@ public class Outtake {
     }
 
     public void outtakeon() {
-        outtakerunning = true;
+        if (!outtakerunning && !restartouttake && !waitForIntakeToStopThenRestartOuttake) {// only start outtake if its not running
+            restartouttake = true;
+            timeofrestartouttake = System.currentTimeMillis();
+        }
+    }
+
+    // if the intake was on, we need time for it to stop before we turn on the outtake
+    public void outtakeonAfterIntake() {
+        if (!outtakerunning && !restartouttake && !waitForIntakeToStopThenRestartOuttake) {// only start outtake if its not running
+            waitForIntakeToStopThenRestartOuttake = true;
+            timeofrestartouttake = System.currentTimeMillis();
+        }
     }
 
     public void outtakeoff() {
@@ -67,6 +83,14 @@ public class Outtake {
     public void ControlMotorSpeed() {
         long currenttime;
         opMode.telemetry.addLine(String.format("outtakespeed %6.3f", speed));
+        if (waitForIntakeToStopThenRestartOuttake){
+            currenttime = System.currentTimeMillis();
+            if ((currenttime - timeofrestartouttake) > 500) {
+                waitForIntakeToStopThenRestartOuttake = false;
+                restartouttake = true;
+                timeofrestartouttake = System.currentTimeMillis();
+            }
+        }
         if (restartouttake) {
             currenttime = System.currentTimeMillis();
             if ((currenttime - timeofrestartouttake) > 500) {
@@ -124,7 +148,20 @@ public class Outtake {
         robotHardwareMap.CenterTransferServo.setPower(0);
     }
 
-    public void outtakeonAfterIntake() {
+
+    public double getspeed(){
+        return speed;
+    }
+
+    public void blockingShoot(){
+        ControlMotorSpeed();
+        //can we tell if the outtake is at speed?
+
+        RunSideTransferServo();
+        RunCenterTransferServer();
+        opMode.sleep(3000);
+        StopSideTransferServo();
+        StopCenterTransferServo();
     }
 }
 

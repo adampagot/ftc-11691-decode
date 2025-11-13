@@ -11,9 +11,20 @@ import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
+//import org.firstinspires.ftc.teamcode.hardware.Light;
+//import org.firstinspires.ftc.teamcode.hardware.LightMode;
+//import org.firstinspires.ftc.teamcode.hardware.RobotControlArm;
+//import org.firstinspires.ftc.teamcode.hardware.RobotControlFlipperMotor;
+//import org.firstinspires.ftc.teamcode.hardware.RobotControlGripperServos;
+//import org.firstinspires.ftc.teamcode.hardware.RobotControlLights;
+//import org.firstinspires.ftc.vision.VisionPortal;
+//import org.firstinspires.ftc.vision.apriltag.AprilTagDetection;
 import org.firstinspires.ftc.teamcode.hardware.Intake;
 import org.firstinspires.ftc.teamcode.hardware.Outtake;
 import org.firstinspires.ftc.teamcode.hardware.camera;
+import org.firstinspires.ftc.vision.apriltag.AprilTagProcessor;
+
+import java.util.List;
 
 public class AutonBase extends LinearOpMode {
 
@@ -21,12 +32,8 @@ public class AutonBase extends LinearOpMode {
     RobotHardwareMap theHardwareMap;
     Intake intake;
 
-
     Outtake outtake;
-
-
     camera Camera;
-
 
     private IMU imu         = null;
 
@@ -106,25 +113,14 @@ public class AutonBase extends LinearOpMode {
         theHardwareMap.backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         theHardwareMap.backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        /*aprilTagProcessor = new AprilTagProcessor.Builder()
-                .setDrawAxes(true)
-                .setDrawTagID(true)
-                .setDrawCubeProjection(true)
-                .setDrawTagOutline(true)
-                .build();
+        intake = new Intake(theHardwareMap, this);
+        intake.initialize();
 
-        visionPortal = new VisionPortal.Builder()
-                .addProcessor(aprilTagProcessor)
-                .setCamera(theHardwareMap.frontCamera)
-                .setCameraResolution(new Size(640, 480))
-                .setStreamFormat(VisionPortal.StreamFormat.YUY2)
-                .enableLiveView(true)
-                .setAutoStopLiveView(true)
-                .build();*/
+        outtake = new Outtake(theHardwareMap, this);
+        outtake.initialize();
 
-        //move claw and arm to default positions during init
-        //theHardwareMap.servoClaw1.setPosition(0.75);
-        //theHardwareMap.servoClaw2.setPosition(0.03);
+        Camera = new camera(theHardwareMap, this);
+
 
         /*telemetry.addData("Starting at",  "%7d :%7d :%7d :%7d",
                 theHardwareMap.frontLeftMotor.getCurrentPosition(),
@@ -180,6 +176,7 @@ public class AutonBase extends LinearOpMode {
                         theHardwareMap.frontLeftMotor.getCurrentPosition(), theHardwareMap.backLeftMotor.getCurrentPosition(),
                         theHardwareMap.frontRightMotor.getCurrentPosition(), theHardwareMap.backRightMotor.getCurrentPosition());
                 telemetry.update();
+                outtake.ControlMotorSpeed();
             }
 
             theHardwareMap.frontLeftMotor.setPower(0);
@@ -242,8 +239,8 @@ public class AutonBase extends LinearOpMode {
 
                 // Apply the turning correction to the current driving speed.
                 moveRobot(driveSpeed, turnSpeed);
+                outtake.ControlMotorSpeed();
             }
-//            telemetry.addData("Arm ENcoder; ", armMotor.getArmEncodedPosition());
 
             // Stop all motion & Turn off RUN_TO_POSITION
             moveRobot(0, 0);
@@ -300,6 +297,7 @@ public class AutonBase extends LinearOpMode {
                         theHardwareMap.frontLeftMotor.getCurrentPosition(), theHardwareMap.backLeftMotor.getCurrentPosition(),
                         theHardwareMap.frontRightMotor.getCurrentPosition(), theHardwareMap.backRightMotor.getCurrentPosition());
                 telemetry.update();
+                outtake.ControlMotorSpeed();
             }
 
             // Stop all motion;
@@ -334,6 +332,7 @@ public class AutonBase extends LinearOpMode {
 
             // Pivot in place by applying the turning correction
             moveRobot(0, turnSpeed);
+            outtake.ControlMotorSpeed();
         }
 
         // Stop all motion;
@@ -341,36 +340,28 @@ public class AutonBase extends LinearOpMode {
         resetHeading();
     }
 
-    /*public void aprilTagAlignment(int tagNumber){
-        List<AprilTagDetection> currentDetections = aprilTagProcessor.getDetections();
-
-        for (AprilTagDetection detection : currentDetections) {
-            //update the lights that we found one
-
-            //If we found something, display the data for it
-            if (detection.ftcPose != null) {
-                telemetry.addData("Tag Bearing", detection.ftcPose.bearing);
-                telemetry.addData("Tag Range", detection.ftcPose.range);
-                telemetry.addData("Tag Yaw", detection.ftcPose.yaw);
-                telemetry.addData("ID", detection.id);
-
-            }
-            //If we detect a specific apriltag and they are pressing X, then we are twisting to that angle
-            if (detection.id == tagNumber) {
-                telemetry.addData("Driveauto", detection.id);
-                double twistAmount = 0.25;
-                //adjust the twist based on the amount of yaw
-                //tweak the color for 5 and or 2
-                //add support for finding 2
-                //test other buttons for ease of use
-
-                if (detection.ftcPose.yaw >= 0) {
-                    twistAmount = twistAmount * -1;
-                }
-                moveRobot(0, twistAmount);
-            }
+    public void aprilTagOutakeSpeedAdjustAndAlignment(){
+        double turnSpeed = 1;
+        Camera.loop();
+        outtake.setSpeed(Camera.outtakespeedfordistance(outtake.getspeed()));
+/*        while (opModeIsActive() && (turnSpeed > 0.3)) {
+            Camera.loop();
+            turnSpeed = Camera.Robotallignwithgoal(0);
+            moveRobot(0, turnSpeed);
+            outtake.ControlMotorSpeed();
         }
-    }*/
+
+
+        // Stop all motion;
+        moveRobot(0, 0);
+        resetHeading();*/
+    }
+
+    public void transferAndLaunchArtifacts() {
+        aprilTagOutakeSpeedAdjustAndAlignment();
+        outtake.blockingShoot();
+        outtake.outtakeoff();
+    }
 
     private void moveRobot(double drive, double turn) {
         driveSpeed = drive;     // save this value as a class member so it can be used by telemetry.

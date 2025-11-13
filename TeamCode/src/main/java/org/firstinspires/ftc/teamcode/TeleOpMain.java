@@ -26,13 +26,13 @@ public class TeleOpMain extends LinearOpMode {
         RobotControlMechanum robotDrive = new RobotControlMechanum(theHardwareMap, this);
         robotDrive.initialize();
 
-        Intake intake = new Intake (theHardwareMap, this);
+        Intake intake = new Intake(theHardwareMap, this);
         intake.initialize();
 
-        Outtake outtake = new Outtake (theHardwareMap, this);
+        Outtake outtake = new Outtake(theHardwareMap, this);
         outtake.initialize();
 
-        camera Camera= new camera (theHardwareMap, this );
+        camera Camera = new camera(theHardwareMap, this);
 
         boolean slowMode = true;
 
@@ -59,19 +59,19 @@ public class TeleOpMain extends LinearOpMode {
         telemetry.addData("Robot", "running teleop.. press (Y) For telemetry");
         telemetry.update();
 
-       // create some gamepads to look at debouncing
+        // create some gamepads to look at debouncing
         Gamepad currentGamepad1 = new Gamepad();
         Gamepad currentGamepad2 = new Gamepad();
         Gamepad previousGamepad1 = new Gamepad();
         Gamepad previousGamepad2 = new Gamepad();
 
-      //double currentClaw = 0.8;
+        //double currentClaw = 0.8;
         //Main Loop
         while (opModeIsActive()) {
             Camera.loop();
-        //  loopTimeStart = System.currentTimeMillis();
+            //  loopTimeStart = System.currentTimeMillis();
 
-           //copy over the previous gamepads so we can compare what changed
+            //copy over the previous gamepads so we can compare what changed
             previousGamepad1.copy(currentGamepad1);
             previousGamepad2.copy(currentGamepad2);
 
@@ -134,19 +134,28 @@ public class TeleOpMain extends LinearOpMode {
             /***************
              * Gamepad 2
              */
-            if (currentGamepad2.a && !previousGamepad2.a) {
-
-                intake.Toggle();
-
+            // left triger press- stop intake and outtake
+            if (currentGamepad2.left_trigger > 0.50 && previousGamepad2.left_trigger<=0.50) {
+                intake.off();
+                outtake.outtakeoff();
             }
 
-            if (currentGamepad2.x && !previousGamepad2.x) {
+            // a press = toggle intake
+            if (currentGamepad2.a && !previousGamepad2.a) {
+                intake.Toggle();
+            }
 
+            // x press - toggle outtake
+            if (currentGamepad2.x && !previousGamepad2.x) {
                 outtake.ToggleOuttakeMotor();
             }
 
-            if (currentGamepad2.y) {
+            // while b is down adjust outtake speed based on camera
+            if (currentGamepad2.b) {
+                outtake.setSpeed(Camera.outtakespeedfordistance(outtake.getspeed()));
+            }
 
+            if (currentGamepad2.y) {
                 outtake.RunSideTransferServo();
                 outtake.RunCenterTransferServer();
 
@@ -171,7 +180,7 @@ public class TeleOpMain extends LinearOpMode {
 
                 Camera.goalcolor(1);
             }
-            //Open/close claw1
+                //Open/close claw1
             /*if (currentGamepad2.left_bumper)
             {
                 clawServo1.moveToPosition(GripperPositions.GRIPPER1_OPEN);
@@ -203,13 +212,14 @@ public class TeleOpMain extends LinearOpMode {
                 theHardwareMap.servoClaw2.setPosition(currentClaw);
             }*/
 
-            outtake.ControlMotorSpeed();
+                outtake.ControlMotorSpeed();
 
-            telemetry.update();
+                telemetry.update();
+
+
+            //  telemetry.addData ("Status", "Stopped");
+            //  telemetry.update();
+
         }
-
-        //  telemetry.addData ("Status", "Stopped");
-        //  telemetry.update();
-
     }
 }
