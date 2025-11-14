@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
 import android.util.Log;
-import android.util.Size;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
