@@ -11,14 +11,24 @@ public class AutonRedLoading extends AutonBase {
     @Override
     public void runOpMode() {
         initialize();
+        Camera.goalcolor(1); // 0 is blue, 1 is red
 
         waitForStart();
+        Camera.start();
+        Camera.loop();
+
+        outtake.outtakeonNoReverseTransfer();
+        outtake.ControlMotorSpeed();
+        aprilTagOutakeSpeedAdjustAndAlignment();
 
         //align with goal
         imuTurn(imuSpeed,-15);
-
+        sleep (250);
         //score preloaded artifacts
-        sleep(3000);
+        transferAndLaunchArtifacts();
+        intake.on();
+        imuDrive(imuSpeed,-37,0);
+
 
         //go to get more
         imuTurn(.6,-30);
@@ -26,10 +36,9 @@ public class AutonRedLoading extends AutonBase {
         imuTurn(imuSpeed,-90);
         imuDrive(imuSpeed,35,0);
 
-        //intake on
-        sleep(1000);
         imuDrive(imuSpeed,-35,0);
-        //intake off
+        intake.off();
+        outtake.outtakeonAfterIntake();
 
         //go to score
         imuTurn(imuSpeed,-90);
@@ -37,7 +46,8 @@ public class AutonRedLoading extends AutonBase {
         imuTurn(imuSpeed,-135);
 
         //score artifacts
-        sleep(3000);
+        transferAndLaunchArtifacts();
+        intake.on();
 
         //go to get more
         imuTurn(imuSpeed,-45);
@@ -45,17 +55,16 @@ public class AutonRedLoading extends AutonBase {
         imuTurn(imuSpeed,-90);
         imuDrive(imuSpeed,33,0);
 
-        //intake on
-        sleep(1000);
+        intake.off();
+        outtake.outtakeonAfterIntake();
 
-        //intake off
         imuDrive(imuSpeed,-33,0);
         imuTurn(imuSpeed,-90);
         imuDrive(imuSpeed,26,0);
         imuTurn(imuSpeed,-135);
 
         //score artifacts
-        sleep(3000);
+        transferAndLaunchArtifacts();
 
         //drive outside launch line for rp
         imuTurn(imuSpeed,-45);

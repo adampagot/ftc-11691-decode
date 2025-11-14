@@ -13,7 +13,7 @@ public class AutonRedDepot extends AutonBase {
     @Override
     public void runOpMode() {
         initialize();
-        Camera.goalcolor(0); // 0 is blue, 1 is red
+        Camera.goalcolor(1); // 0 is blue, 1 is red
 
         waitForStart();
         Camera.start();
@@ -24,7 +24,6 @@ public class AutonRedDepot extends AutonBase {
         imuDrive(imuSpeed,53,0);
 
         //score preloaded artifacts
-        sleep (1000);
         transferAndLaunchArtifacts();
         intake.on();
 

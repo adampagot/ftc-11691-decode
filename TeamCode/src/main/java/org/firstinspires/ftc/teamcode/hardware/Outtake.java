@@ -68,6 +68,11 @@ public class Outtake {
         }
     }
 
+    public void outtakeonNoReverseTransfer() {
+        outtakerunning = true;
+    }
+
+
     // if the intake was on, we need time for it to stop before we turn on the outtake
     public void outtakeonAfterIntake() {
         if (!outtakerunning && !restartouttake && !waitForIntakeToStopThenRestartOuttake) {// only start outtake if its not running

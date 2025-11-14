@@ -23,7 +23,6 @@ public class AutonBlueDepot extends AutonBase {
         imuDrive(imuSpeed,53,0);
 
         //score preloaded artifacts
-        sleep (1000);
         transferAndLaunchArtifacts();
         intake.on();
 
