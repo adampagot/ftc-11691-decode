@@ -5,7 +5,7 @@ import org.firstinspires.ftc.teamcode.hardware.Intake;
 import org.firstinspires.ftc.teamcode.hardware.Outtake;
 @Autonomous(name = "Auton Blue Loading", group = "Autons")
 public class Autonblueloading extends AutonBase {
-    double imuSpeed = 0.7;
+    double imuSpeed = 0.5;
 
     @Override
     public void runOpMode() {
@@ -21,22 +21,23 @@ public class Autonblueloading extends AutonBase {
         aprilTagOutakeSpeedAdjustAndAlignment();
 
          //align with goal
-        imuTurn(imuSpeed,15);
-sleep (250);
+        imuDrive(imuSpeed,-1,0);
+        imuTurn(imuSpeed,23);
+        sleep (500);
         //score preloaded artifacts
         transferAndLaunchArtifacts();
         intake.on();
-        imuDrive(imuSpeed,-37,0);
+        imuDrive(imuSpeed,-17,0);
 
 
         //go to get more
-        imuTurn(.6,30);
-        imuDrive(imuSpeed,-23,0);
-        imuTurn(imuSpeed,90);
-        imuDrive(imuSpeed,35,0);
+        imuTurn(.6,117);
+        imuDrive(0.3,35,0);
 
         imuDrive(imuSpeed,-35,0);
+        sleep (750);
         intake.off();
+
         outtake.outtakeonAfterIntake();
 
         //go to score
@@ -51,9 +52,10 @@ sleep (250);
         imuTurn(imuSpeed,45);
         imuDrive(imuSpeed,26,0);
         imuTurn(imuSpeed,90);
-        imuDrive(imuSpeed,33,0);
-
+        imuDrive(0.3,33,0);
+        sleep (750);
         intake.off();
+            /*
         outtake.outtakeonAfterIntake();
 
         //go to score
@@ -67,6 +69,6 @@ sleep (250);
 
         //drive outside launch line for rp
         imuTurn(imuSpeed,45);
-        imuDrive(imuSpeed,30,0);
+        imuDrive(imuSpeed,30,0);*/
     }
 }
