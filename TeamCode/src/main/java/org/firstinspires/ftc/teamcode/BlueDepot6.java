@@ -41,6 +41,6 @@ public class BlueDepot6 extends AutonBase {
 
         //get out of launch area
         imuTurn(imuSpeed,25);
-        imuDrive(imuSpeed,-26,0);
+        imuDrive(imuSpeed,-30,0);
     }
 }
