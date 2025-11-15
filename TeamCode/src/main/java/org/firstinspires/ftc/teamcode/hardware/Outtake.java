@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.LED;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.RobotHardwareMap;
@@ -114,6 +115,24 @@ public class Outtake {
             robotHardwareMap.outtakeMotorBack2.setPower(0);
 
         }
+
+        opMode.telemetry.addLine(String.format("Ticks per second %6.0f", robotHardwareMap.outtakeMotorBack1.getVelocity()));
+        if (robotHardwareMap.outtakeMotorBack1.getVelocity() > 500){
+            // to fast
+            robotHardwareMap.redOutakeLed.on();
+            robotHardwareMap.greenOutakeLed.off();
+        }
+        else if (robotHardwareMap.outtakeMotorBack1.getVelocity() < 200){
+            // to slow
+            robotHardwareMap.redOutakeLed.on();
+            robotHardwareMap.greenOutakeLed.on();
+        }
+        else {
+            // just right
+            robotHardwareMap.redOutakeLed.off();
+            robotHardwareMap.greenOutakeLed.on();
+        }
+
 
     }
 

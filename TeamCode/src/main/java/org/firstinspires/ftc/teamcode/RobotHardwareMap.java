@@ -15,6 +15,7 @@ import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
+import com.qualcomm.robotcore.hardware.LED;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
@@ -66,6 +67,9 @@ public class RobotHardwareMap {
     public CRServo RightTransferServo;
     public CRServo CenterTransferServo;
 
+    public LED redOutakeLed;
+    public LED greenOutakeLed;
+
 
 
     public IMU chImu;
@@ -108,6 +112,10 @@ public class RobotHardwareMap {
         LeftTransferServo = baseHMap.get(CRServo.class,"LTS");
         RightTransferServo = baseHMap.get(CRServo.class,"RTS");
         CenterTransferServo = baseHMap.get(CRServo.class,"CTS");
+
+        redOutakeLed = baseHMap.get(LED.class, "redOutakeLed");
+        greenOutakeLed= baseHMap.get(LED.class, "greenOutakeLed");
+
         //Initializes the IMU
         chImu = baseHMap.get(IMU.class, "chImu");
 
