@@ -164,7 +164,7 @@ public class Outtake {
 
         RunSideTransferServo();
         RunCenterTransferServer();
-        opMode.sleep(3000);
+        opMode.sleep(3500);
         StopSideTransferServo();
         StopCenterTransferServo();
     }
