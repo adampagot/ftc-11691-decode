@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.RobotHardwareMap;
@@ -29,6 +30,7 @@ public class Outtake {
     }
 
     public void initialize() {
+        PIDFCoefficients pidfCoeficnets = new PIDFCoefficients();
         robotHardwareMap.outtakeMotorBack1.setDirection(DcMotorSimple.Direction.REVERSE);
         robotHardwareMap.outtakeMotorBack2.setDirection(DcMotorSimple.Direction.FORWARD);
         outtakerunning = false;
@@ -39,6 +41,12 @@ public class Outtake {
         robotHardwareMap.outtakeMotorBack2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robotHardwareMap.outtakeMotorBack1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         robotHardwareMap.outtakeMotorBack2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        pidfCoeficnets.f = 0; //  32767 from first, 1900 max velicty
+        pidfCoeficnets.p = 40;  // 0.1 * pidfCoeficnets.f  from first
+        pidfCoeficnets.i = 3;  // 0.1 * pidfCoeficnets.p from first
+        pidfCoeficnets.d = 0; // 0 from first
+        robotHardwareMap.outtakeMotorBack1.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfCoeficnets);
+        robotHardwareMap.outtakeMotorBack2.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfCoeficnets);
     }
 
 
@@ -87,6 +95,7 @@ public class Outtake {
 
     public void ControlMotorSpeed() {
         long currenttime;
+        PIDFCoefficients pidfCoeficnets;
         opMode.telemetry.addLine(String.format("outtakespeed %6.3f", speed));
         if (waitForIntakeToStopThenRestartOuttake){
             currenttime = System.currentTimeMillis();
@@ -117,6 +126,9 @@ public class Outtake {
 
         opMode.telemetry.addLine(String.format("outtakevelocity1 %6.3f", robotHardwareMap.outtakeMotorBack1.getVelocity()));
         opMode.telemetry.addLine(String.format("outtakevelocity2 %6.3f", robotHardwareMap.outtakeMotorBack2.getVelocity()));
+
+        pidfCoeficnets = robotHardwareMap.outtakeMotorBack1.getPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER);
+        opMode.telemetry.addLine(String.format( pidfCoeficnets.toString()));
     }
 
     public void increasemotorspeed() {
