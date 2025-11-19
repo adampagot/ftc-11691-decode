@@ -34,7 +34,7 @@ public class Outtake {
         outtakerunning = false;
         restartouttake = false;
         waitForIntakeToStopThenRestartOuttake = false;
-        speed = .412;
+        speed = 960;
         robotHardwareMap.outtakeMotorBack1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robotHardwareMap.outtakeMotorBack2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robotHardwareMap.outtakeMotorBack1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -44,10 +44,10 @@ public class Outtake {
 
     public void setSpeed(double speed_in) {
         speed = speed_in;
-        if (speed >= 1) {
-            speed = 1;
-        } else if (speed <= .01) {
-            speed = .01;
+        if (speed >= 1900) {
+            speed = 1900;
+        } else if (speed <= 200) {
+            speed = 200;
         }
     }
 
@@ -107,27 +107,29 @@ public class Outtake {
             }
         }
         if (outtakerunning) {
-            robotHardwareMap.outtakeMotorBack1.setPower(speed);
-            robotHardwareMap.outtakeMotorBack2.setPower(speed);
+            robotHardwareMap.outtakeMotorBack1.setVelocity(speed);
+            robotHardwareMap.outtakeMotorBack2.setVelocity(speed);
         } else {
             robotHardwareMap.outtakeMotorBack1.setPower(0);
             robotHardwareMap.outtakeMotorBack2.setPower(0);
 
         }
 
+        opMode.telemetry.addLine(String.format("outtakevelocity1 %6.3f", robotHardwareMap.outtakeMotorBack1.getVelocity()));
+        opMode.telemetry.addLine(String.format("outtakevelocity2 %6.3f", robotHardwareMap.outtakeMotorBack2.getVelocity()));
     }
 
     public void increasemotorspeed() {
-        speed = speed + 0.005;
-        if (speed >= 1) {
-            speed = 1;
+        speed = speed + 20;
+        if (speed >= 1900) {
+            speed = 1900;
         }
     }
 
     public void decreasemotorspeed() {
-        speed = speed - 0.005;
-        if (speed < .05) {
-            speed = 0.05;
+        speed = speed - 20;
+        if (speed < 200) {
+            speed = 200;
         }
     }
 

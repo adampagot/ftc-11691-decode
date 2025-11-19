@@ -78,8 +78,8 @@ public class camera {
         double power = powerin;
         double y2 = 1.0; // april tag area closes point from april tag
         double y1 = 0.5; // april tag area furthest point to april tag
-        double p2 = 0.38;  // power cloest point from april tag
-        double p1 = 0.40863; // power  furthest point to april tag
+        double p2 = 900;  // power cloest point from april tag
+        double p1 = 960; // power  furthest point to april tag
         double m = (p2 - p1) / (y2 - y1);
         double b = (p2 - (m * y2));
         if ((llResult != null) && llResult.isValid()){
