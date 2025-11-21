@@ -28,6 +28,7 @@ public class AutonRedLoading extends AutonBase {
         //score preloaded artifacts
         transferAndLaunchArtifacts();
         intake.on();
+        sleep(1000);
         imuDrive(imuSpeed,-17,0);
 
 
@@ -42,16 +43,34 @@ public class AutonRedLoading extends AutonBase {
         outtake.outtakeonAfterIntake();
 
         //go to score
-        imuTurn(imuSpeed,-90);
-        imuDrive(imuSpeed,50,0);
-        imuTurn(imuSpeed,-135);
+       imuTurn(.6,117);
+       imuDrive(imuSpeed,17,0);
+        aprilTagOutakeSpeedAdjustAndAlignment();
 
         //score artifacts
         transferAndLaunchArtifacts();
         intake.on();
 
+        //go get more
+        imuTurn(.6,-45);
+        imuDrive(imuSpeed,-30,0);
+        imuTurn(.6,-90);
+        imuDrive(imuSpeed,50,0);
+
+        //go score
+        imuDrive(imuSpeed,-50,0);
+        imuTurn(.6,90);
+        intake.off();
+
+        //score
+        outtake.outtakeonAfterIntake();
+        imuDrive(imuSpeed,30,0);
+        imuTurn(.6,23);
+        aprilTagOutakeSpeedAdjustAndAlignment();
+        transferAndLaunchArtifacts();
+
         //go to get more
-        imuTurn(imuSpeed,-45);
+       /* imuTurn(imuSpeed,-45);
         imuDrive(imuSpeed,26,0);
         imuTurn(imuSpeed,-90);
         imuDrive(0.3,33,0);

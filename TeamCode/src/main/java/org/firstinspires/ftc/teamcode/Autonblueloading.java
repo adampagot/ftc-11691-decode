@@ -20,13 +20,62 @@ public class Autonblueloading extends AutonBase {
         outtake.ControlMotorSpeed();
         aprilTagOutakeSpeedAdjustAndAlignment();
 
-         //align with goal
+        //align with goal
         imuDrive(imuSpeed,-1,0);
         imuTurn(imuSpeed,23);
         sleep (500);
         //score preloaded artifacts
         transferAndLaunchArtifacts();
         intake.on();
+        sleep(1000);
+        imuDrive(imuSpeed,-17,0);
+
+
+        //go to get more
+        imuTurn(.6,117);
+        imuDrive(0.3,35,0);
+
+        imuDrive(imuSpeed,-35,0);
+        sleep (750);
+        intake.off();
+
+        outtake.outtakeonAfterIntake();
+
+        //go to score
+        imuTurn(.6,-117);
+        imuDrive(imuSpeed,17,0);
+        aprilTagOutakeSpeedAdjustAndAlignment();
+
+        //score artifacts
+        transferAndLaunchArtifacts();
+        intake.on();
+
+        //go get more
+        imuTurn(.6,45);
+        imuDrive(imuSpeed,-30,0);
+        imuTurn(.6,90);
+        imuDrive(imuSpeed,50,0);
+
+        //go score
+        imuDrive(imuSpeed,-50,0);
+        imuTurn(.6,-90);
+        intake.off();
+
+        //score
+        outtake.outtakeonAfterIntake();
+        imuDrive(imuSpeed,30,0);
+        imuTurn(.6,-23);
+        aprilTagOutakeSpeedAdjustAndAlignment();
+        transferAndLaunchArtifacts();
+
+         //align with goal
+        /*imuDrive(imuSpeed,-1,0);
+        imuTurn(imuSpeed,23);
+        sleep (500);
+        //score preloaded artifacts
+        transferAndLaunchArtifacts();
+        intake.on();
+        sleep(1000);
         imuDrive(imuSpeed,-17,0);
 
 
