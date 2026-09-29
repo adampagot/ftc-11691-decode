@@ -53,7 +53,7 @@ public class camera {
             opMode.telemetry.addLine(String.format("XYA %6.1f %6.1f  %6.3f ", llResult.getTx(),  llResult.getTy(), llResult.getTa()));
             opMode.telemetry.addData("BotPos", botpos.toString());
             opMode.telemetry.addData("Yaw", botpos.getOrientation().getYaw());
-
+            opMode.telemetry.addData("AprilTag Distance (area proxy)", String.format("%.2f%%", llResult.getTa()));
         }
     }
 
