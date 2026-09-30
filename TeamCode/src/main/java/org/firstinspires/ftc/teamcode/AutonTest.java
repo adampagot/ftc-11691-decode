@@ -14,11 +14,10 @@ public class AutonTest extends AutonBase {
         initialize();
         waitForStart();
 
-        imuDrive(imuSpeed, 50, 0);
-        encoderStrafe(imuSpeed, -50, 30);
-        imuDrive(imuSpeed, -50, 0);
-        encoderStrafe(imuSpeed, 50, 30);
-
+        for (int i = 1; i <= 4; i++) {
+            imuStrafe(1, 50, 0, 30);
+            imuStrafe(1, -50, 0, 30);
+        }
 
 
         /*
