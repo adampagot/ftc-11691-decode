@@ -43,7 +43,7 @@ public class AutonBase extends LinearOpMode {
     private double headingError = 0;
 
     static final double     P_TURN_GAIN            = 0.02;     // Larger is more responsive, but also less stable
-    static final double     P_DRIVE_GAIN           = 0.03;
+    static final double     P_DRIVE_GAIN           = 0.06;
     static final double     HEADING_THRESHOLD       = 1.0 ;
 
     private double  driveSpeed    = 0;
@@ -219,7 +219,6 @@ public class AutonBase extends LinearOpMode {
             // Start driving straight, and then enter the control loop
             maxDriveSpeed = Math.abs(maxDriveSpeed);
             moveRobot(maxDriveSpeed, 0);
-
             // keep looping while we are still active, and BOTH motors are running.
             while (opModeIsActive() &&
                     (theHardwareMap.backLeftMotor.isBusy() && theHardwareMap.backRightMotor.isBusy()&&
@@ -309,6 +308,95 @@ public class AutonBase extends LinearOpMode {
             sleep(250);   // optional pause after each move.
         }
     }
+
+
+
+
+
+    public void imuStrafe(double speed, double strafeDistance, double degrees, double timeoutS){
+        int newFrontLeftTarget;
+        int newBackLeftTarget;
+        int newFrontRightTarget;
+        int newBackRightTarget;
+
+        if (opModeIsActive()){
+
+            // Determine new target position, and pass to motor controller
+            newFrontLeftTarget = theHardwareMap.frontLeftMotor.getCurrentPosition() + (int)(strafeDistance * COUNTS_PER_INCH);
+            newBackLeftTarget = theHardwareMap.backLeftMotor.getCurrentPosition() + (int)(-strafeDistance * COUNTS_PER_INCH);
+            newFrontRightTarget = theHardwareMap.frontRightMotor.getCurrentPosition() + (int)(-strafeDistance * COUNTS_PER_INCH);
+            newBackRightTarget = theHardwareMap.backRightMotor.getCurrentPosition() + (int)(strafeDistance * COUNTS_PER_INCH);
+
+            theHardwareMap.frontLeftMotor.setTargetPosition(newFrontLeftTarget);
+            theHardwareMap.backLeftMotor.setTargetPosition(newBackLeftTarget);
+            theHardwareMap.frontRightMotor.setTargetPosition(newFrontRightTarget);
+            theHardwareMap.backRightMotor.setTargetPosition(newBackRightTarget);
+
+            // Turn On RUN_TO_POSITION
+            theHardwareMap.frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            theHardwareMap.backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            theHardwareMap.frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            theHardwareMap.backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            // reset the timeout time and start motion.
+            runtime.reset();
+            theHardwareMap.frontLeftMotor.setPower(Math.abs(speed));
+            theHardwareMap.backLeftMotor.setPower(Math.abs(speed));
+            theHardwareMap.frontRightMotor.setPower(Math.abs(speed));
+            theHardwareMap.backRightMotor.setPower(Math.abs(speed));
+
+            while (opModeIsActive() &&
+                    (runtime.seconds() < timeoutS) &&
+                    (theHardwareMap.frontLeftMotor.isBusy() && theHardwareMap.backLeftMotor.isBusy()
+                            && theHardwareMap.frontRightMotor.isBusy() && theHardwareMap.backRightMotor.isBusy())) {
+
+                // Determine required steering to keep on heading
+                turnSpeed = getSteeringCorrection(degrees, P_DRIVE_GAIN);
+
+                // if driving in reverse, the motor correction also needs to be reversed
+                if (strafeDistance < 0)
+                    turnSpeed *= -1.0;
+
+                theHardwareMap.frontLeftMotor.setPower(Math.abs(speed) - turnSpeed);
+                theHardwareMap.frontRightMotor.setPower(Math.abs(speed) - turnSpeed);
+                theHardwareMap.backLeftMotor.setPower(Math.abs(speed) + turnSpeed);
+                theHardwareMap.backRightMotor.setPower(Math.abs(speed) + turnSpeed);
+                outtake.ControlMotorSpeed();
+
+
+
+
+
+
+                // Display it for the driver.
+                telemetry.addData("Running to",  " %7d :%7d :%7d :%7d",
+                        newFrontLeftTarget,  newBackLeftTarget, newFrontRightTarget, newBackRightTarget);
+                telemetry.addData("Currently at",  " at %7d :%7d :%7d :%7d",
+                        theHardwareMap.frontLeftMotor.getCurrentPosition(), theHardwareMap.backLeftMotor.getCurrentPosition(),
+                        theHardwareMap.frontRightMotor.getCurrentPosition(), theHardwareMap.backRightMotor.getCurrentPosition());
+                telemetry.update();
+                outtake.ControlMotorSpeed();
+            }
+
+
+            // Stop all motion;
+            theHardwareMap.frontLeftMotor.setPower(0);
+            theHardwareMap.backLeftMotor.setPower(0);
+            theHardwareMap.frontRightMotor.setPower(0);
+            theHardwareMap.backRightMotor.setPower(0);
+
+            // Turn off RUN_TO_POSITION
+            theHardwareMap.frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            theHardwareMap.backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            theHardwareMap.frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            theHardwareMap.backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+            imuTurn(1, -degrees);   // turn back to the heading we were holding
+
+            sleep(250);   // optional pause after each move.
+        }
+    }
+
 
     public void imuTurn(double maxTurnSpeed, double degrees) {
 
