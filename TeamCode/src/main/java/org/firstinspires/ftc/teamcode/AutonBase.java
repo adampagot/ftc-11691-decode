@@ -62,9 +62,8 @@ public class AutonBase extends LinearOpMode {
     static final double     COUNTS_PER_MOTOR_REV    = 537.6 ;    // eg: TETRIX Motor Encoder
     static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;     // No External Gearing.
     static final double     WHEEL_DIAMETER_INCHES   = 3.8 ; //3.77953     // For figuring circumference
-    static final double     COUNTS_PER_INCH         = 45;
-            //= (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
-            //(WHEEL_DIAMETER_INCHES * 3.1415);
+    static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
+            (WHEEL_DIAMETER_INCHES * 3.1415);
 
 //    RobotCameraHandler robotCameraHandler;
 //    RobotControlLights lights;
@@ -379,6 +378,7 @@ public class AutonBase extends LinearOpMode {
                 outtake.ControlMotorSpeed();
             }
 
+
             // Stop all motion;
             theHardwareMap.frontLeftMotor.setPower(0);
             theHardwareMap.backLeftMotor.setPower(0);
@@ -390,6 +390,8 @@ public class AutonBase extends LinearOpMode {
             theHardwareMap.backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             theHardwareMap.frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             theHardwareMap.backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+            imuTurn(1, -degrees);   // turn back to the heading we were holding
 
             sleep(250);   // optional pause after each move.
         }
