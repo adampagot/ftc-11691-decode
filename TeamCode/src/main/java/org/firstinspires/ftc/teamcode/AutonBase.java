@@ -43,7 +43,7 @@ public class AutonBase extends LinearOpMode {
     private double headingError = 0;
 
     static final double     P_TURN_GAIN            = 0.02;     // Larger is more responsive, but also less stable
-    static final double     P_DRIVE_GAIN           = 0.03;
+    static final double     P_DRIVE_GAIN           = 0.06;
     static final double     HEADING_THRESHOLD       = 1.0 ;
 
     private double  driveSpeed    = 0;
@@ -62,8 +62,9 @@ public class AutonBase extends LinearOpMode {
     static final double     COUNTS_PER_MOTOR_REV    = 537.6 ;    // eg: TETRIX Motor Encoder
     static final double     DRIVE_GEAR_REDUCTION    = 1.0 ;     // No External Gearing.
     static final double     WHEEL_DIAMETER_INCHES   = 3.8 ; //3.77953     // For figuring circumference
-    static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
-            (WHEEL_DIAMETER_INCHES * 3.1415);
+    static final double     COUNTS_PER_INCH         = 45;
+            //= (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
+            //(WHEEL_DIAMETER_INCHES * 3.1415);
 
 //    RobotCameraHandler robotCameraHandler;
 //    RobotControlLights lights;
@@ -355,10 +356,6 @@ public class AutonBase extends LinearOpMode {
 
                 // if driving in reverse, the motor correction also needs to be reversed
                 if (strafeDistance < 0)
-                    turnSpeed *= -0;
-
-                // Apply the turning correction to the current driving speed.
-                if (strafeDistance < 0)
                     turnSpeed *= -1.0;
 
                 theHardwareMap.frontLeftMotor.setPower(Math.abs(speed) - turnSpeed);
@@ -366,6 +363,10 @@ public class AutonBase extends LinearOpMode {
                 theHardwareMap.backLeftMotor.setPower(Math.abs(speed) + turnSpeed);
                 theHardwareMap.backRightMotor.setPower(Math.abs(speed) + turnSpeed);
                 outtake.ControlMotorSpeed();
+
+
+
+
 
 
                 // Display it for the driver.

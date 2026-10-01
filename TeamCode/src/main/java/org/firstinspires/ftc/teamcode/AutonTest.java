@@ -15,8 +15,8 @@ public class AutonTest extends AutonBase {
         waitForStart();
 
         for (int i = 1; i <= 4; i++) {
-            imuStrafe(1, 50, 0, 30);
-            imuStrafe(1, -50, 0, 30);
+            imuStrafe(0.5, 50, 0, 30);
+            imuStrafe(0.5, -50, 0, 30);
         }
 
 
